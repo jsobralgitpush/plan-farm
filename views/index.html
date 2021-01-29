@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Planilha Fazenda</title>
+
+    <!-- Importação dos arquivos de CSS -->
+    <link rel="stylesheet" href="../photon/css/photon.min.css" />
+    <link rel="stylesheet" href="../assets/css/jquery.modal.min.css" />
+    <link rel="stylesheet" href="../assets/css/jquery-ui.css" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <!-- Importação dos arquivos de CSS -->
+
+    <!-- Importação default para usarmos o jQuery -->
+    <script>
+      window.$ = window.jQuery = require("jquery");
+    </script>
+    <!-- Importação default para usarmos o jQuery -->
+
+    <!-- Importação de Controllers -->
+    <script src="../controllers/controller_master.js"></script>
+    <script src="../controllers/controller_generic.js"></script>
+    <script src="../controllers/controller_financial.js"></script>
+    <script src="../controllers/controller_weighing.js"></script>
+    <script src="../controllers/controller_register.js"></script>
+    <script src="../controllers/controller_metrics.js"></script>
+    <!-- Importação de Controllers -->
+
+    <!-- Importação de Bibliotecas -->
+    <script src="../assets/javascript/jquery.modal.min.js"></script>
+    <script src="../assets/javascript/jquery-ui.js"></script>
+    <!-- Importação de Bibliotecas -->
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="pane-group">
+          <div class="pane pane-sm sidebar">
+            <nav class="nav-group">
+              <!-- Menu de Métricas -->
+              <h5 class="nav-group-title">Dahboard</h5>
+              <!-- Cada métrica fica aqui, no exemplo -> "<p class="nav-group-item metric-gmd">Financeiro</p>"  -->
+              <div class="d-flex">
+                <button class="btn btn-default mx-auto add-metric">
+                  Adicionar Métrica
+                </button>
+              </div>
+              <!-- Menu de Métricas -->
+
+              <!-- Menu de Tabelas -->
+              <h5 class="nav-group-title">Tabelas</h5>
+              <div class="collections-div">
+                <!-- Para cada tabela no db.json... -->
+              </div>
+              <div class="d-flex">
+                <button class="btn btn-default mx-auto add-table">
+                  Adicionar Tabela
+                </button>
+              </div>
+              <!-- Menu de Tabelas -->
+            </nav>
+          </div>
+
+          <div class="pane">
+            <!-- Menu de Registros no formato de tabela -->
+            <div class="records">
+              <table class="table-striped">
+                <thead>
+                  <div class="buttons-show"></div>
+                  <tr class="table-head"></tr>
+                </thead>
+                <tbody class="table-body"><tbody>
+              </table>
+            </div>
+            <!-- Menu de Registros no formato de tabela -->
+            <div class="metric">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Criar Registro -->
+    <div id="register" class="modal"></div>
+
+    <!-- Criar Coluna -->
+    <div id="column" class="modal"></div>
+  </body>
+</html>
