@@ -1,0 +1,216 @@
+@font-face {
+  font-family: "Poppins";
+  font-weight: regular;
+  src: url(../../assets/fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-weight: bold;
+  src: url(../../assets/fonts/Poppins-Bold.ttf);
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.d-flex {
+  display: flex;
+}
+.mx-auto {
+  margin: 0 auto;
+}
+
+.ml-3 {
+  margin-left: 1.5rem;
+}
+.add-metric,
+.add-table {
+  padding: 5px 30px;
+  margin: 0 auto;
+}
+.add-btn:hover,
+.add-metric:hover,
+.add-table:hover,
+.nav-group-item:hover {
+  cursor: pointer;
+  background: rgb(230, 230, 230);
+  transition: 0.1s;
+}
+
+.nav-group-item:active,
+.add-table:active,
+.add-metric:active {
+  background: lightgray;
+}
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin-left: 30px;
+  font-weight: bold;
+  font-size: 16pt;
+}
+
+.container-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.container-buttons.between {
+  justify-content: space-between;
+}
+
+.add-register,
+.add-column {
+  background: #444;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  margin: 10px;
+  padding: 5px 30px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.add-register:hover,
+.add-column:hover {
+  background: #000;
+}
+
+.modal-input {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+  margin-bottom: 10px;
+}
+.modal-input label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.modal-input div {
+  display: flex;
+}
+.modal-input div:nth-child(2) {
+  position: absolute;
+  left: 290px;
+}
+.modal-input input {
+  cursor: text;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+.modal-input input::placeholder {
+  color: lightgray;
+  cursor: text;
+}
+.modal-input span {
+  margin-left: 10px;
+}
+.modal-input span:hover {
+  cursor: pointer;
+}
+
+button.create,
+button.create-and-new {
+  margin-left: 10px;
+  margin-top: 20px;
+  padding: 5px 50px;
+  cursor: pointer;
+  background: #444;
+  border-radius: 10px;
+  color: #fff;
+  border: none;
+  transition: 0.2s;
+}
+button.create:hover {
+  background: #000;
+}
+
+.color-tip {
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  border: 2px solid lightgray;
+  margin-right: 10px;
+}
+.color-0 {
+  background: linear-gradient(
+    300deg,
+    rgb(19, 15, 232) 25%,
+    rgb(255, 255, 255) 100%
+  );
+}
+.color-1 {
+  background: linear-gradient(
+    300deg,
+    rgba(232, 15, 15, 51) 25%,
+    rgb(255, 255, 255) 100%
+  );
+}
+.color-2 {
+  background: linear-gradient(
+    300deg,
+    rgb(15, 232, 66) 25%,
+    rgb(255, 255, 255) 100%
+  );
+}
+.color-3 {
+  background: linear-gradient(
+    300deg,
+    rgb(232, 15, 200) 25%,
+    rgb(255, 255, 255) 100%
+  );
+}
+.color-4 {
+  background: linear-gradient(
+    300deg,
+    rgb(255, 255, 85) 25%,
+    rgb(255, 255, 255) 100%
+  );
+}
+.color-5 {
+  background: linear-gradient(
+    300deg,
+    rgb(255, 192, 244) 25%,
+    rgb(255, 255, 255) 100%
+  );
+}
+.color-6 {
+  background: linear-gradient(
+    300deg,
+    rgb(255, 158, 40) 25%,
+    rgb(255, 255, 255) 100%
+  );
+}
+.color-7 {
+  background: linear-gradient(
+    300deg,
+    rgb(15, 232, 218) 25%,
+    rgb(255, 255, 255) 100%
+  );
+}
+.table-head,
+.table-body {
+  text-align: center;
+}
+.table-head th {
+  transition: 0.2s;
+}
+.table-head th:hover {
+  background: rgb(230, 230, 230);
+}
+
+input[type="date"] {
+  width: 150px;
+}
+.modal {
+  padding: 0px 15px 20px;
+}
+.modal h3 {
+  margin-bottom: 20px;
+}
