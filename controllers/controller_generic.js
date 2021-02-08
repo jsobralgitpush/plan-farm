@@ -1,4 +1,5 @@
 var fs = require("fs");
+const { data } = require("jquery");
 database = require("../db.json");
 
 $(document).ready(function () {
@@ -76,44 +77,130 @@ $(document).ready(function () {
         <h3>Novo registro</h3>
       `);
 
-      // e-2) Adicionando inputs para cada coluna presente
-      $.each(columns, function (i, obj) {
-        column_infos = database[name]["schema"][obj]
-        comment = `${column_infos["comment"]}`;
-        value_to = pre_value(`${column_infos["defaultValue"]}`);
-        input_type = `${column_infos["inputType"]}`;
-        input_to_place = ""
-
-        if (input_type == "number") {
-          input_to_place = `<input placeholder="${obj}" class='input-${name}' type="${column_infos["inputType"]}" id="${obj}" value=${column_infos["defaultValue"]}>`
-        } else if (input_type == "select") {
-          table_to_pick = column_infos["select"]
-          var options_to_place = Object.values(database[table_to_pick]["data"]);
-          input_to_place = `<select class='input-${name}' id="${obj}">`
-
-          $.each(options_to_place, function (i, obj) {
-            input_to_place += `<option value=${obj["ID"]}>${obj["identificador"]}</option>`
-          })
-
-          input_to_place += "</select>"
-        }
-
+      // Case tabela Pesagem
+      if (name == "Pesagem") {
+        // input id da pesagem e do gado
         $("#register").append(
           `
           <div class="modal-input">
-              <span class="color-tip color-${i}"></span>
-              <label>${obj}</label>
-              ${input_to_place}
-              <span class="icon icon-help-circled help" title="${comment}"></span>
+              <span class="color-tip color"></span>
+              <label>ID</label>
+              <input class='input-${name} id-pesagem' id="ID" type="number">
+          </div>
+          <div class="modal-input">
+              <span class="color-tip color"></span>
+              <label>Gado</label>
+              <input class='input-${name} id-gado' id="Gado" disabled>
+          </div>
+          <div class="modal-input">
+            <span class="color-tip color"></span>
+            <label>Check</label>
+            <input class='input-${name} check-gado' id="Check" disabled>
           </div>
           `
-        );
-      });
+        )
+
+      
+        // Enquanto o ID da pesagem não tiver sido selecionado, desabilitador o ID do gado
+        $('.id-pesagem').on("change", function() {
+          gado = $('.id-gado')
+          $('.check-gado').val("")
+
+          if ($(this).val() != "") {
+            gado.prop("disabled", false)
+          }
+
+          $('.id-gado, .id-pesagem').on("change", function() {
+            // Procurar por este gado no cadastro
+            gado_id = $(this).val()
+  
+            // 1-Gado não existe
+            var match = $.grep(database["Cadastro"]["data"], function(i, n) {
+              return i.ID == gado_id;
+            })
+  
+            if(jQuery.isEmptyObject(match)) {
+              $('.check-gado').val('N/A')
+            }
+  
+  
+            // 2-Gado existe
+            // 2a) Já foi computado
+            pesagem_id = $('.id-pesagem').val()
+            match_gado = $.grep(database["Pesagem"]["data"], function(i, n) {
+              return (i.ID == pesagem_id && i.Gado == gado_id);
+            })
+  
+            if(jQuery.isEmptyObject(match_gado)) {
+            } else {
+              $('.check-gado').val('REP')
+            }
+
+            // 2b) Ainda não foi computado
+            if ($('.check-gado').val() == "") {
+              $('.check-gado').val('OK')
+            }
+
+  
+          })
+
+
+  
+        })
+
+      // Case tabela Financeiro
+      } else if (name == "Financeiro") {
+
+
+      // Case tabela Genérica
+      } else {
+        // e-2) Adicionando inputs para cada coluna presente
+        $.each(columns, function (i, obj) {
+          column_infos = database[name]["schema"][obj]
+          comment = `${column_infos["comment"]}`;
+          value_to = pre_value(`${column_infos["defaultValue"]}`, database[name]["data"]);
+          input_type = `${column_infos["inputType"]}`;
+          input_to_place = ""
+
+          if (input_type == "number") {
+            input_to_place = `<input placeholder="${obj}" class='input-${name}' type="${column_infos["inputType"]}" id="${obj}" value=${column_infos["defaultValue"]}>`
+          } else if (input_type == "select") {
+            table_to_pick = column_infos["select"]
+            var options_to_place = Object.values(database[table_to_pick]["data"]);
+            input_to_place = `<select class='input-${name}' id="${obj}">`
+
+            $.each(options_to_place, function (i, obj) {
+              input_to_place += `<option value=${obj["ID"]}>${obj["ID"]}</option>`
+            })
+
+            input_to_place += "</select>"
+          } else if (input_type == "fixed") {
+            input_to_place = `<input placeholder="${obj}" class='input-${name}' type="${column_infos["inputType"]}" id="${obj}" value=${value_to} disabled>`
+          } else if (input_type == "date") {
+            input_to_place = `<input placeholder="${obj}" class='input-${name}' id="${obj}" value=${value_to}>`
+          }
+
+          $("#register").append(
+            `
+            <div class="modal-input">
+                <span class="color-tip color-${i}"></span>
+                <label>${obj}</label>
+                ${input_to_place}
+                <span class="icon icon-help-circled help" title="${comment}"></span>
+            </div>
+            `
+          );
+        });
+
+      }
+
+      
 
       // e-3) Verificando máscara de campo
       $("input").on("change", function () {
         input = mask_field(
           database[name]["schema"][$(this).attr("id")],
+          database[name]["data"],
           $(this).val()
         );
 
@@ -178,19 +265,24 @@ $(document).ready(function () {
 function dateValidator(date) {
   return date < 10 ? "0" + date : date;
 }
-function pre_value(field) {
+function pre_value(field, data) {
   if (field == "today") {
     const date = new Date();
-    const today = `${date.getFullYear()}-${dateValidator(
-      date.getMonth() + 1
-    )}-${dateValidator(date.getDate())}`;
+    const today = `${dateValidator(date.getDate())}-${dateValidator(date.getMonth() + 1)}-${date.getFullYear()}`;
     return today;
+  } else if (field == "auto_increment") {
+    var to_increment = []
+    for (i in data) {
+      to_increment.push(parseInt(data[i]["ID"]))
+    }
+
+    return to_increment.sort().slice(-1)[0] + 1 || 1
   } else {
     return "";
   }
 }
 
-function mask_field(object_schema, value) {
+function mask_field(object_schema, object_data, value) {
   if (object_schema["dataType"] == "range") {
     
     if (value > parseInt(object_schema["maxRange"])) {
@@ -200,7 +292,7 @@ function mask_field(object_schema, value) {
       };
     }
 
-  } else {
+  }  else {
 
     return {
       result: 0
