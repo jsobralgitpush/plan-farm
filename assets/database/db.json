@@ -198,7 +198,7 @@
   },
   "Rebanho": {
     "schema": {
-      "Numero": {
+      "ID": {
         "dataType": "auto_increment",
         "inputType": "fixed",
         "comment": "Número do Animal, correspondente ao ID",

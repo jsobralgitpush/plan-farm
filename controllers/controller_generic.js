@@ -719,16 +719,11 @@ function pre_value(field, data, options) {
     return today;
   } else if (field == "auto_increment") {
     var to_increment = []
-    if (data[i]["ID"]) {
-      for (i in data) {
-        to_increment.push(parseInt(data[i]["ID"]))
-      }
-    } else if (data[i]["Numero"]) {
-      for (i in data) {
-        to_increment.push(parseInt(data[i]["Numero"]))
-      }
-    }
 
+    
+    for (i in data) {
+      to_increment.push(parseInt(data[i]["ID"]))
+    }
 
     return to_increment.sort().slice(-1)[0] + 1 || 1
   } else if (field == "kg_to_@+") {
