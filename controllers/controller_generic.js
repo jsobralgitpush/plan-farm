@@ -1,7 +1,10 @@
 const { match } = require("assert");
 var fs = require("fs");
 const { data } = require("jquery");
-database = require("../db.json");
+database_relative_path = "../assets/database/db.json"
+database_absolute_path = __dirname.replace('/views', '/assets/database/db.json')
+database = require(database_relative_path);
+
 
 $(document).ready(function () {
 
@@ -82,9 +85,9 @@ $(document).ready(function () {
       if (name == "Pesagem") {
 
         // Lidando com o input "Rebanho"
-        table_to_pick = "Lote"
+        table_to_pick = "Rebanho"
         var options_to_place = Object.values(database[table_to_pick]["data"]);
-        input_to_place = `<select class='input-${name} id-lote' id=${table_to_pick}><option disabled selected value> -- selecione uma opção -- </option>`
+        input_to_place = `<select class='input-${name} id-rebanho' id=${table_to_pick}><option disabled selected value> -- selecione uma opção -- </option>`
 
         $.each(options_to_place, function (i, obj) {
           input_to_place += `<option value=${obj["ID"]}>${obj["ID"]}</option>`
@@ -97,7 +100,7 @@ $(document).ready(function () {
           `
           <div class="modal-input">
             <span class="color-tip color"></span>
-            <label>Lote</label>
+            <label>Rebanho</label>
             ${input_to_place}
           </div> 
           <div class="modal-input">
@@ -110,8 +113,6 @@ $(document).ready(function () {
             <label>Check</label>
             <input class='input-${name} check-gado' id="Check" disabled>
           </div>
-            <ul id="pesagem-gado-info">
-            </ul>
           <div class="modal-input">
             <span class="color-tip color"></span>
             <label>Kg</label>
@@ -122,14 +123,16 @@ $(document).ready(function () {
             <label>Peso @</label>
             <input class='input-${name} peso-arroba' id="Peso @" disabled>
           </div>
-            <ul id="gmd-info">
-            </ul>
           <div class="modal-input">
           <span class="color-tip color"></span>
             <label>Tamanho</label>
             <input class='input-${name} tamanho' id="Tamanho" disabled>
           </div>
+            <ul id="gmd-info">
+            </ul>
             <ul id="tamanho-info">
+            </ul>
+            <ul id="pesagem-gado-info">
             </ul>
           `
         )
@@ -140,19 +143,19 @@ $(document).ready(function () {
           $('#tamanho-info').empty()
           $('.peso-arroba').val($(this).val()/30)
 
-          lote_id = $('.id-lote').val()
+          rebanho_id = $('.id-rebanho').val()
           gado_id = $('.id-gado').val()
           tamanho = $('.tamanho').val()
 
-          match_lote = $.grep(database["Lote"]["data"], function(i, n) {
-            return (i.ID == lote_id);
+          match_rebanho = $.grep(database["Rebanho"]["data"], function(i, n) {
+            return (i.ID == rebanho_id);
           });
 
           match_gado = $.grep(database["Cadastro"]["data"], function(i, n) {
             return i.ID == gado_id;
           })
 
-          dias_na_fazenda = count_farms_day(match_lote[0]["Data do Lote"], match_gado[0]["Data de chegada"])
+          dias_na_fazenda = count_farms_day(match_rebanho[0]["Data do Rebanho"], match_gado[0]["Data de chegada"])
           gmd_total = total_gmd(dias_na_fazenda, match_gado[0]["Peso @"], $('.peso-arroba').val())
           
           match_ultima_pesagem = $.grep(database["Pesagem"]["data"], function(i, n) {
@@ -168,6 +171,7 @@ $(document).ready(function () {
           if ($(this).val() != "") {
             $('#gmd-info').append(
               `
+              <h3>Informações de GMD</h3>
               <div class="modal-input">
                 <p><strong>Dias na Fazenda:</strong> ${dias_na_fazenda}  </p>
               </div>
@@ -181,17 +185,18 @@ $(document).ready(function () {
             )
           }
 
-          uinf = match_lote[0]["U inferior"]
-          usup = match_lote[0]["U superior"]
-          pinf = match_lote[0]["P inferior"]
-          psup = match_lote[0]["P superior"]
-          minf = match_lote[0]["M inferior"]
-          msup = match_lote[0]["M superior"]
-          ginf = match_lote[0]["G inferior"]
-          gsup = match_lote[0]["G superior"]
+          uinf = match_rebanho[0]["U inferior"]
+          usup = match_rebanho[0]["U superior"]
+          pinf = match_rebanho[0]["P inferior"]
+          psup = match_rebanho[0]["P superior"]
+          minf = match_rebanho[0]["M inferior"]
+          msup = match_rebanho[0]["M superior"]
+          ginf = match_rebanho[0]["G inferior"]
+          gsup = match_rebanho[0]["G superior"]
 
           $('#tamanho-info').append(
             `
+            <h3>Informações de Tamanho</h3>
             <div class="modal-input">
               <p><strong>U:</strong> ${uinf}-${usup}  </p>
               <p><strong>P:</strong> ${pinf}-${psup}  </p>
@@ -217,7 +222,7 @@ $(document).ready(function () {
         })
 
         // Enquanto o ID do Lote não tiver sido selecionado, desabilitador o ID do gado
-        $('.id-lote').on("change", function() {
+        $('.id-rebanho').on("change", function() {
           gado = $('.id-gado')
           $('.check-gado').val("")
           $('.kg-gado').val("")
@@ -230,7 +235,7 @@ $(document).ready(function () {
 
         })
 
-        $('.id-gado, .id-lote').on("change, keyup", function() {
+        $('.id-gado, .id-rebanho').on("change, keyup", function() {
           // Procurar por este gado no cadastro
           gado_id = $('.id-gado').val()
 
@@ -253,9 +258,9 @@ $(document).ready(function () {
 
           // 2-Gado existe
           // 2a) Já foi computado
-          pesagem_id = $('.id-lote').val()
+          pesagem_id = $('.id-rebanho').val()
           match_gado = $.grep(database["Pesagem"]["data"], function(i, n) {
-            return (i.Lote == pesagem_id && i.Gado == gado_id);
+            return (i.Rebanho == pesagem_id && i.Gado == gado_id);
           })
 
           if(jQuery.isEmptyObject(match_gado)) {
@@ -286,25 +291,26 @@ $(document).ready(function () {
           } else {
             // 3b) Gado existe
 
-            rebanho_id = match_gado[0]["Rebanho"]
+            lote_id = match_gado[0]["Lote"]
 
-            match_rebanho = $.grep(database["Rebanho"]["data"], function(i, n) {
-              return (i.ID == rebanho_id);
+            match_lote = $.grep(database["Lote"]["data"], function(i, n) {
+              return (i.ID == lote_id);
             });
 
-            custo_frete = parseInt(match_rebanho[0]["Frete"])
-            custo_rebanho = parseInt(match_rebanho[0]["Valor Animais"])
-            custo_comissao = parseInt(match_rebanho[0]["Comissão"])
-            qtd_animais = parseInt(match_rebanho[0]["Número de Animais"])
+            custo_frete = parseInt(match_lote[0]["Frete"])
+            custo_rebanho = parseInt(match_lote[0]["Valor Animais"])
+            custo_comissao = parseInt(match_lote[0]["Comissão"])
+            qtd_animais = parseInt(match_lote[0]["Número de Animais"])
             preco_unidade = (custo_frete + custo_comissao + custo_rebanho) / qtd_animais
 
             $("#pesagem-gado-info").append(
               `
+              <h3>Informações do Gado</h3>
               <div class="modal-input">
-                <p><strong> Data de Chegada:</strong> ${match_gado[0]["Data de chegada"]} </p>
+                <p><strong> Data de Chegada:</strong> ${match_lote[0]["Data de Chegada"]} </p>
               </div>
               <div class="modal-input">  
-                <p><strong> Comprador:</strong> ${match_rebanho[0]["Comprador"]} </p>
+                <p><strong> Comprador:</strong> ${match_lote[0]["Comprador"]} </p>
               </div>
               <div class="modal-input">  
                 <p><strong> Peso de Chegada em @:</strong> ${match_gado[0]["Peso @"]} </p>
@@ -473,14 +479,11 @@ $(document).ready(function () {
           }
 
         })
-
-
-
       
       } else if (name == "Cadastro") {
 
         // Lidando com o input "Rebanho"
-        table_to_pick = "Rebanho"
+        table_to_pick = "Lote"
         var options_to_place = Object.values(database[table_to_pick]["data"]);
         input_to_place = `<select class='input-${name}' id=${table_to_pick}>`
 
@@ -514,7 +517,7 @@ $(document).ready(function () {
           </div>
           <div class="modal-input">
             <span class="color-tip color"></span>
-            <label>Rebanho</label>
+            <label>Lote</label>
             ${input_to_place}
           </div> 
           `
@@ -618,14 +621,14 @@ $(document).ready(function () {
         });
 
         // e-6-3) gravar os objeto dentro do arquivo db.json
-        fs.readFile("db.json", "utf8", function readFileCallback(err, data) {
+        fs.readFile(database_absolute_path, "utf8", function readFileCallback(err, data) {
           if (err) {
             console.log(err);
           } else {
             obj = JSON.parse(data); //now it an object
             obj[name]["data"].push(to_insert); //add some data
             json = JSON.stringify(obj); //convert it back to json
-            fs.writeFile("db.json", json, "utf8", function (err, result) {
+            fs.writeFile(database_absolute_path, json, "utf8", function (err, result) {
               if (err) {
                 console.log(err);
               } else {
@@ -717,4 +720,8 @@ function check_tamanho(weight, uinf, usup, pinf, psup, minf, msup, ginf, gsup) {
   } else if (between(weight, ginf[1], gsup[1])) {
     return ginf[0]
   }
+}
+
+function set_classificacao() {
+  
 }

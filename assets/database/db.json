@@ -30,45 +30,23 @@
         "select": "",
         "defaultValue": "kg_to_@"
       },
-      "Rebanho": {
+      "Lote": {
         "dataType": "",
         "inputType": "select",
         "comment": "Teste de comentário 6",
-        "select": "Rebanho"
+        "select": "Lote"
+      },
+      "Classificação": {
+        "dataType": "",
+        "inputType": "number",
+        "comment": "Teste de comentário 6",
+        "select": ""
       }
     },
     "data": [
-      {
-        "ID": "1",
-        "Data de chegada": "02-03-2021",
-        "Peso de chegada em Kg": "30",
-        "Peso @": "1",
-        "Rebanho": "1"
-      },
-      {
-        "ID": "2",
-        "Data de chegada": "02-03-2021",
-        "Peso de chegada em Kg": "60",
-        "Peso @": "2",
-        "Rebanho": "1"
-      },
-      {
-        "ID": "3",
-        "Data de chegada": "02-03-2021",
-        "Peso de chegada em Kg": "90",
-        "Peso @": "3",
-        "Rebanho": "1"
-      },
-      {
-        "ID": "1",
-        "Data de chegada": "04-03-2021",
-        "Peso de chegada em Kg": "1",
-        "Peso @": "0.03333333333333333",
-        "Rebanho": "1"
-      }
     ]
   },
-  "Rebanho": {
+  "Lote": {
     "schema": {
       "ID": {
         "dataType": "auto_increment",
@@ -120,18 +98,27 @@
     "data": [
       {
         "ID": "1",
-        "Data de Chegada": "02-03-2021",
-        "Frete": "200",
-        "Comissão": "500",
-        "Valor Animais": "3000",
-        "Comprador": "Marcelo",
-        "Número de Animais": "10"
+        "Data de Chegada": "08-03-2021",
+        "Frete": "1",
+        "Comissão": "1",
+        "Valor Animais": "1",
+        "Comprador": "1",
+        "Número de Animais": "1"
+      },
+      {
+        "ID": "2",
+        "Data de Chegada": "08-03-2021",
+        "Frete": "1",
+        "Comissão": "1",
+        "Valor Animais": "1",
+        "Comprador": "1",
+        "Número de Animais": "1"
       }
     ]
   },
   "Pesagem": {
     "schema": {
-      "Lote": {
+      "Rebanho": {
         "dataType": "",
         "inputType": "number",
         "comment": "Número do Animal, correspondente ao ID",
@@ -219,7 +206,7 @@
     },
     "data": []
   },
-  "Lote": {
+  "Rebanho": {
     "schema": {
       "ID": {
         "dataType": "",
@@ -230,7 +217,7 @@
         "defaultValue": "",
         "select": ""
       },
-      "Data do Lote": {
+      "Data do Rebanho": {
         "dataType": "today",
         "inputType": "date",
         "defaultValue": "today",
@@ -292,39 +279,15 @@
     "data": [
       {
         "ID": "1",
-        "Data do Lote": "02-03-2021",
-        "U inferior": "0.0001",
-        "U superior": "5.7",
-        "P inferior": "5.7",
-        "P superior": "8",
-        "M inferior": "8",
-        "M superior": "10",
-        "G inferior": "10",
-        "G superior": "25"
-      },
-      {
-        "ID": "2",
-        "Data do Lote": "02-09-2021",
-        "U inferior": "0.0001",
-        "U superior": "5.7",
-        "P inferior": "5.7",
-        "P superior": "8",
-        "M inferior": "8",
-        "M superior": "10",
-        "G inferior": "10",
-        "G superior": "25"
-      },
-      {
-        "ID": "3",
-        "Data do Lote": "02-03-2022",
-        "U inferior": "0.0001",
-        "U superior": "5.7",
-        "P inferior": "5.7",
-        "P superior": "8",
-        "M inferior": "8",
-        "M superior": "10",
-        "G inferior": "10",
-        "G superior": "25"
+        "Data do Rebanho": "08-03-2021",
+        "U inferior": "1",
+        "U superior": "1",
+        "P inferior": "1",
+        "P superior": "1",
+        "M inferior": "1",
+        "M superior": "1",
+        "G inferior": "1",
+        "G superior": "1"
       }
     ]
   }
