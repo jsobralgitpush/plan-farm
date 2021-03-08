@@ -90,7 +90,7 @@ $(document).ready(function () {
         input_to_place = `<select class='input-${name} id-rebanho' id=${table_to_pick}><option disabled selected value> -- selecione uma opção -- </option>`
 
         $.each(options_to_place, function (i, obj) {
-          input_to_place += `<option value=${obj["ID"]}>${obj["ID"]}</option>`
+          input_to_place += `<option value=${obj["Numero"]}>${obj["Numero"]}</option>`
         })
 
         input_to_place += '</select>'
@@ -105,8 +105,13 @@ $(document).ready(function () {
           </div> 
           <div class="modal-input">
               <span class="color-tip color"></span>
-              <label>Gado</label>
-              <input class='input-${name} id-gado' id="Gado" disabled>
+              <label>Gado ID</label>
+              <input class='input-${name} id-gado' id="Gado_ID" disabled>
+          </div>
+          <div class="modal-input">
+              <span class="color-tip color"></span>
+              <label>Lote</label>
+              <input class='input-${name}' id="Lote" disabled>
           </div>
           <div class="modal-input">
             <span class="color-tip color"></span>
@@ -148,7 +153,7 @@ $(document).ready(function () {
           tamanho = $('.tamanho').val()
 
           match_rebanho = $.grep(database["Rebanho"]["data"], function(i, n) {
-            return (i.ID == rebanho_id);
+            return (i.Numero == rebanho_id);
           });
 
           match_gado = $.grep(database["Cadastro"]["data"], function(i, n) {
@@ -159,7 +164,7 @@ $(document).ready(function () {
           gmd_total = total_gmd(dias_na_fazenda, match_gado[0]["Peso @"], $('.peso-arroba').val())
           
           match_ultima_pesagem = $.grep(database["Pesagem"]["data"], function(i, n) {
-            return i.Gado == gado_id;
+            return i.Gado_ID == gado_id;
           })
           
           if(jQuery.isEmptyObject(match_ultima_pesagem)) {
@@ -207,19 +212,20 @@ $(document).ready(function () {
             `
           )
 
-
           $('.tamanho').val(check_tamanho(
-            parseInt($('.peso-arroba').val()),
-            ["U",parseInt(uinf)],
-            ["U",parseInt(usup)],
-            ["P",parseInt(pinf)],
-            ["P",parseInt(psup)],
-            ["M",parseInt(minf)],
-            ["M",parseInt(msup)],
-            ["G",parseInt(ginf)],
-            ["G",parseInt(gsup)]
+            parseFloat($('.peso-arroba').val()),
+            ["U",parseFloat(uinf)],
+            ["U",parseFloat(usup)],
+            ["P",parseFloat(pinf)],
+            ["P",parseFloat(psup)],
+            ["M",parseFloat(minf)],
+            ["M",parseFloat(msup)],
+            ["G",parseFloat(ginf)],
+            ["G",parseFloat(gsup)]
           ))
         })
+
+
 
         // Enquanto o ID do Lote não tiver sido selecionado, desabilitador o ID do gado
         $('.id-rebanho').on("change", function() {
@@ -238,7 +244,6 @@ $(document).ready(function () {
         $('.id-gado, .id-rebanho').on("change, keyup", function() {
           // Procurar por este gado no cadastro
           gado_id = $('.id-gado').val()
-
 
           // Analisar se o campo gado já foi preenchido
           if (gado_id == "") {
@@ -260,7 +265,7 @@ $(document).ready(function () {
           // 2a) Já foi computado
           pesagem_id = $('.id-rebanho').val()
           match_gado = $.grep(database["Pesagem"]["data"], function(i, n) {
-            return (i.Rebanho == pesagem_id && i.Gado == gado_id);
+            return (i.Rebanho == pesagem_id && i.Gado_ID == gado_id);
           })
 
           if(jQuery.isEmptyObject(match_gado)) {
@@ -294,8 +299,10 @@ $(document).ready(function () {
             lote_id = match_gado[0]["Lote"]
 
             match_lote = $.grep(database["Lote"]["data"], function(i, n) {
-              return (i.ID == lote_id);
+              return (i.Lote == lote_id);
             });
+
+            $("#Lote").val(match_lote[0]["Lote"])
 
             custo_frete = parseInt(match_lote[0]["Frete"])
             custo_rebanho = parseInt(match_lote[0]["Valor Animais"])
@@ -349,10 +356,11 @@ $(document).ready(function () {
               <option disabled selected value> -- selecione uma opção -- </option>
               <option value="ADM" >ADM</option>
               <option value="Manutenção e Equipamento" >Manutenção e Equipamento</option>
-              <option value="Manutenção do Pasto" >Manutenção do Pasto</option>
+              <option value="Manutenção de Pastagem" >Manutenção de Pastagem</option>
               <option value="Mão de Obra" >Mão de Obra</option>
               <option value="Sal" >Sal</option>
               <option value="Vacina" >Vacina</option>
+              <option value="Dia a Dia" >Dia a Dia</option>
             </select> 
           </div>
           <div class="modal-input">
@@ -449,9 +457,24 @@ $(document).ready(function () {
             }));
 
 
-          } else if (option == "Manutenção do Pasto") {
+          } else if (option == "Manutenção de Pastagem") {
 
             $('#Subclassificação').empty()
+
+            $('#Subclassificação').append($('<option>', {
+              value: 'Herbecida',
+              text: 'Herbecida'
+            }));
+
+            $('#Subclassificação').append($('<option>', {
+              value: 'Roçagem',
+              text: 'Roçagem'
+            }));
+
+            $('#Subclassificação').append($('<option>', {
+              value: 'Plantil',
+              text: 'Plantil'
+            }));
 
           } else if (option == "Mão de Obra") {
 
@@ -468,13 +491,52 @@ $(document).ready(function () {
               text: 'e-social'
             }));
 
+            $('#Subclassificação').append($('<option>', {
+              value: 'Diária',
+              text: 'Diária'
+            }));
+
           } else if (option == "Sal") {
 
             $('#Subclassificação').empty()
 
+            $('#Subclassificação').append($('<option>', {
+              value: 'DSM',
+              text: 'DSM'
+            }));
+
+            $('#Subclassificação').append($('<option>', {
+              value: 'Outros',
+              text: 'Outros'
+            }));
+
           } else if (option == "Vacina") {
 
             $('#Subclassificação').empty()
+
+            $('#Subclassificação').append($('<option>', {
+              value: 'Vernífugo',
+              text: 'Vernífugo'
+            }));
+
+            $('#Subclassificação').append($('<option>', {
+              value: 'Vacina',
+              text: 'Vacina'
+            }));
+
+          } else if (option == "Dia a Dia") {
+
+            $('#Subclassificação').empty()
+
+            $('#Subclassificação').append($('<option>', {
+              value: 'Caixa',
+              text: 'Caixa'
+            }));
+
+            $('#Subclassificação').append($('<option>', {
+              value: 'Diesel',
+              text: 'Diesel'
+            }));
 
           }
 
@@ -520,17 +582,23 @@ $(document).ready(function () {
             <label>Lote</label>
             ${input_to_place}
           </div> 
+          <div class="modal-input">
+            <span class="color-tip color"></span>
+            <label>Tamanho</label>
+            <input class='input-${name} tamanho' id="Tamanho" disabled>
+          </div>  
           `
         )
 
         // Peso @ = Peso kg / 30
         $('.peso-kg').on('change, keyup', function() {
           $('.peso-arroba').val($(this).val()/30)
+          peso_arroba = $('.peso-arroba').val()
+          $("#Tamanho").val(set_tamanho(peso_arroba))
         })
 
 
       
-
       // Case tabela Genérica
       } else {
         // e-2) Adicionando inputs para cada coluna presente
@@ -574,8 +642,6 @@ $(document).ready(function () {
         });
 
       }
-
-      
 
       // e-3) Verificando máscara de campo
       $("input").on("change", function () {
@@ -653,9 +719,16 @@ function pre_value(field, data, options) {
     return today;
   } else if (field == "auto_increment") {
     var to_increment = []
-    for (i in data) {
-      to_increment.push(parseInt(data[i]["ID"]))
+    if (data[i]["ID"]) {
+      for (i in data) {
+        to_increment.push(parseInt(data[i]["ID"]))
+      }
+    } else if (data[i]["Numero"]) {
+      for (i in data) {
+        to_increment.push(parseInt(data[i]["Numero"]))
+      }
     }
+
 
     return to_increment.sort().slice(-1)[0] + 1 || 1
   } else if (field == "kg_to_@+") {
@@ -722,6 +795,16 @@ function check_tamanho(weight, uinf, usup, pinf, psup, minf, msup, ginf, gsup) {
   }
 }
 
-function set_classificacao() {
-  
+function set_tamanho(weight) {
+  weight = parseFloat(weight)
+
+  if (between(weight, 0.00001, 5.5)) {
+    return "U"
+  } else if (between(weight, 5.5, 7)) {
+    return "P"
+  } else if (between(weight, 7, 9)) {
+    return "M"
+  } else if (between(weight, 9, 10000)) {
+    return "G"
+  }
 }

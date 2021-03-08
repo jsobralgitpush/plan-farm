@@ -36,19 +36,18 @@
         "comment": "Teste de comentário 6",
         "select": "Lote"
       },
-      "Classificação": {
+      "Tamanho": {
         "dataType": "",
         "inputType": "number",
         "comment": "Teste de comentário 6",
         "select": ""
       }
     },
-    "data": [
-    ]
+    "data": []
   },
   "Lote": {
     "schema": {
-      "ID": {
+      "Lote": {
         "dataType": "auto_increment",
         "inputType": "fixed",
         "comment": "Número do Animal, correspondente ao ID",
@@ -95,26 +94,7 @@
         "select": ""
       }
     },
-    "data": [
-      {
-        "ID": "1",
-        "Data de Chegada": "08-03-2021",
-        "Frete": "1",
-        "Comissão": "1",
-        "Valor Animais": "1",
-        "Comprador": "1",
-        "Número de Animais": "1"
-      },
-      {
-        "ID": "2",
-        "Data de Chegada": "08-03-2021",
-        "Frete": "1",
-        "Comissão": "1",
-        "Valor Animais": "1",
-        "Comprador": "1",
-        "Número de Animais": "1"
-      }
-    ]
+    "data": []
   },
   "Pesagem": {
     "schema": {
@@ -127,7 +107,16 @@
         "defaultValue": "",
         "select": ""
       },
-      "Gado": {
+      "Gado_ID": {
+        "dataType": "",
+        "inputType": "number",
+        "comment": "Número do Animal, correspondente ao ID",
+        "minRange": "10",
+        "maxRange": "100",
+        "defaultValue": "",
+        "select": ""
+      },
+      "Lote": {
         "dataType": "",
         "inputType": "number",
         "comment": "Número do Animal, correspondente ao ID",
@@ -163,7 +152,8 @@
         "defaultValue": ""
       }
     },
-    "data": []
+    "data": [
+    ]
   },
   "Financeiro": {
     "schema": {
@@ -208,13 +198,13 @@
   },
   "Rebanho": {
     "schema": {
-      "ID": {
-        "dataType": "",
-        "inputType": "number",
+      "Numero": {
+        "dataType": "auto_increment",
+        "inputType": "fixed",
         "comment": "Número do Animal, correspondente ao ID",
         "minRange": "10",
         "maxRange": "100",
-        "defaultValue": "",
+        "defaultValue": "auto_increment",
         "select": ""
       },
       "Data do Rebanho": {
@@ -276,19 +266,6 @@
         "select": ""
       }
     },
-    "data": [
-      {
-        "ID": "1",
-        "Data do Rebanho": "08-03-2021",
-        "U inferior": "1",
-        "U superior": "1",
-        "P inferior": "1",
-        "P superior": "1",
-        "M inferior": "1",
-        "M superior": "1",
-        "G inferior": "1",
-        "G superior": "1"
-      }
-    ]
+    "data": []
   }
 }
