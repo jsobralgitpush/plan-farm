@@ -1,3 +1,4 @@
+const { match } = require("assert");
 var fs = require("fs");
 const { data } = require("jquery");
 database = require("../db.json");
@@ -121,18 +122,107 @@ $(document).ready(function () {
             <label>Peso @</label>
             <input class='input-${name} peso-arroba' id="Peso @" disabled>
           </div>
+            <ul id="gmd-info">
+            </ul>
+          <div class="modal-input">
+          <span class="color-tip color"></span>
+            <label>Tamanho</label>
+            <input class='input-${name} tamanho' id="Tamanho" disabled>
+          </div>
+            <ul id="tamanho-info">
+            </ul>
           `
         )
 
         // Peso @ = Peso kg / 30
         $('.kg-gado').on('change, keyup', function() {
+          $('#gmd-info').empty()
+          $('#tamanho-info').empty()
           $('.peso-arroba').val($(this).val()/30)
+
+          lote_id = $('.id-lote').val()
+          gado_id = $('.id-gado').val()
+          tamanho = $('.tamanho').val()
+
+          match_lote = $.grep(database["Lote"]["data"], function(i, n) {
+            return (i.ID == lote_id);
+          });
+
+          match_gado = $.grep(database["Cadastro"]["data"], function(i, n) {
+            return i.ID == gado_id;
+          })
+
+          dias_na_fazenda = count_farms_day(match_lote[0]["Data do Lote"], match_gado[0]["Data de chegada"])
+          gmd_total = total_gmd(dias_na_fazenda, match_gado[0]["Peso @"], $('.peso-arroba').val())
+          
+          match_ultima_pesagem = $.grep(database["Pesagem"]["data"], function(i, n) {
+            return i.Gado == gado_id;
+          })
+          
+          if(jQuery.isEmptyObject(match_ultima_pesagem)) {
+            gmd_ultima_pesagem = "primeira pesagem"
+          } else {
+            gmd_ultima_pesagem = last_gmd(match_ultima_pesagem[0]["Peso @"], $('.peso-arroba').val())
+          }          
+
+          if ($(this).val() != "") {
+            $('#gmd-info').append(
+              `
+              <div class="modal-input">
+                <p><strong>Dias na Fazenda:</strong> ${dias_na_fazenda}  </p>
+              </div>
+              <div class="modal-input">
+                <p><strong>GMD:</strong> ${gmd_total}  </p>
+              </div>
+              <div class="modal-input">
+                <p><strong>GMD 180 dias:</strong> ${gmd_ultima_pesagem}  </p>
+              </div>
+              `
+            )
+          }
+
+          uinf = match_lote[0]["U inferior"]
+          usup = match_lote[0]["U superior"]
+          pinf = match_lote[0]["P inferior"]
+          psup = match_lote[0]["P superior"]
+          minf = match_lote[0]["M inferior"]
+          msup = match_lote[0]["M superior"]
+          ginf = match_lote[0]["G inferior"]
+          gsup = match_lote[0]["G superior"]
+
+          $('#tamanho-info').append(
+            `
+            <div class="modal-input">
+              <p><strong>U:</strong> ${uinf}-${usup}  </p>
+              <p><strong>P:</strong> ${pinf}-${psup}  </p>
+              <p><strong>M:</strong> ${minf}-${msup}  </p>
+              <p><strong>G:</strong> ${ginf}-${gsup}  </p>
+            </div>
+
+            `
+          )
+
+
+          $('.tamanho').val(check_tamanho(
+            parseInt($('.peso-arroba').val()),
+            ["U",parseInt(uinf)],
+            ["U",parseInt(usup)],
+            ["P",parseInt(pinf)],
+            ["P",parseInt(psup)],
+            ["M",parseInt(minf)],
+            ["M",parseInt(msup)],
+            ["G",parseInt(ginf)],
+            ["G",parseInt(gsup)]
+          ))
         })
 
         // Enquanto o ID do Lote não tiver sido selecionado, desabilitador o ID do gado
         $('.id-lote').on("change", function() {
           gado = $('.id-gado')
           $('.check-gado').val("")
+          $('.kg-gado').val("")
+          $('.peso-arroba').val("")
+
 
           if ($(this).val() != "") {
             gado.prop("disabled", false)
@@ -185,6 +275,7 @@ $(document).ready(function () {
         $('.id-gado').on("change, keyup", function() {
           gado_id = $(this).val()
           $("#pesagem-gado-info").empty()
+          $("#gmd-info").empty()
   
           match_gado = $.grep(database["Cadastro"]["data"], function(i, n) {
             return (i.ID == gado_id);
@@ -590,3 +681,40 @@ function mask_field(object_schema, object_data, value) {
   }
 }
 
+function count_farms_day(today, arrive) {
+  var today_parts = today.split('-')
+  var arrive_parts = arrive.split('-')
+
+  var today_date = new Date(today_parts[2], today_parts[1] - 1, today_parts[0])
+  var arrive_data = new Date(arrive_parts[2], arrive_parts[1] - 1, arrive_parts[0])
+
+  return (today_date - arrive_data) / (1000*3600*24)
+}
+
+function total_gmd(days, arrive_weight, today_weight) {
+  return (parseInt(today_weight) - parseInt(arrive_weight)) / days
+}
+
+function last_gmd(last_weight, today_weight) {
+  return (parseInt(today_weight) - parseInt(last_weight)) / 180 || "Não houve última pesagem"
+}
+
+function between(x, min, max) {
+  if (x >= min && x <= max) {
+    return true 
+  } else {
+    return false
+  };
+}
+
+function check_tamanho(weight, uinf, usup, pinf, psup, minf, msup, ginf, gsup) {
+  if (between(weight, uinf[1], usup[1])) {
+    return uinf[0]
+  } else if (between(weight, pinf[1], psup[1])) {
+    return pinf[0]
+  } else if (between(weight, minf[1], msup[1])) {
+    return minf[0]
+  } else if (between(weight, ginf[1], gsup[1])) {
+    return ginf[0]
+  }
+}
