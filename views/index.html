@@ -18,12 +18,13 @@
     <!-- Importação default para usarmos o jQuery -->
 
     <!-- Importação de Controllers -->
+    <script src="../controllers/controller_columns.js"></script>
+    <script src="../controllers/controller_input.js"></script>
     <script src="../controllers/controller_master.js"></script>
     <script src="../controllers/controller_generic.js"></script>
-    <script src="../controllers/controller_financial.js"></script>
     <script src="../controllers/controller_weighing.js"></script>
     <script src="../controllers/controller_register.js"></script>
-    <script src="../controllers/controller_metrics.js"></script>
+    <script type="module" src="../assets/javascript/utils.js"></script>
     <!-- Importação de Controllers -->
 
     <!-- Importação de Bibliotecas -->
@@ -41,21 +42,34 @@
               <h5 class="nav-group-title">Dahboard</h5>
               <!-- Cada métrica fica aqui, no exemplo -> "<p class="nav-group-item metric-gmd">Financeiro</p>"  -->
               <div class="d-flex">
-                <button class="btn btn-default mx-auto add-metric">
-                  Adicionar Métrica
-                </button>
               </div>
               <!-- Menu de Métricas -->
 
               <!-- Menu de Tabelas -->
               <h5 class="nav-group-title">Tabelas</h5>
               <div class="collections-div">
+                <p class="nav-group-item collection" id="lote">
+                  Lote
+                </p>
+                <p class="nav-group-item collection" id="cadastro">
+                  Cadastro
+                </p>
+                <p class="nav-group-item collection" id="info_pesagem">
+                  Informações Pesagem
+                </p>
+                <p class="nav-group-item collection" id="pesagem">
+                  Pesagem
+                </p>
+                <p class="nav-group-item collection" id="financeiro">
+                  Financeiro
+                </p>
+                <p class="nav-group-item collection" id="chuva">
+                  Chuva
+                </p>
+                <p class="nav-group-item collection" id="sal">
+                  Sal
+                </p>
                 <!-- Para cada tabela no db.json... -->
-              </div>
-              <div class="d-flex">
-                <button class="btn btn-default mx-auto add-table">
-                  Adicionar Tabela
-                </button>
               </div>
               <!-- Menu de Tabelas -->
             </nav>
@@ -69,8 +83,12 @@
                   <div class="buttons-show"></div>
                   <tr class="table-head"></tr>
                 </thead>
-                <tbody class="table-body"><tbody>
+                <tbody class="table-body">
+                <tbody>
               </table>
+
+              <div class="action">
+              </div>
             </div>
             <!-- Menu de Registros no formato de tabela -->
             <div class="metric">
