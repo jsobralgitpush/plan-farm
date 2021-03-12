@@ -7,7 +7,7 @@ financeiro_columns = ["Data", "Valor", "Classificação", "Subclassificação", 
 columns_array = [
   ["Lote", lote_columns], 
   ["Cadastro", cadastro_columns], 
-  ["Informações Pesagem", info_pesagem_columns], 
+  ["Info_Pesagem", info_pesagem_columns], 
   ["Pesagem", pesagem_columns],
   ["Financeiro", financeiro_columns]
 ]
@@ -32,6 +32,8 @@ document.addEventListener('click',function(e){
         })
       }
     })
+
+    input_place.innerHTML += `<button class=${table} id="save_record">Salvar Dados</button>`
 
    }
 });

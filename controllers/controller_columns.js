@@ -35,8 +35,8 @@ function set_table(html, name) {
     <div class="title">${name}</div>
     <div class="container-buttons">
       <a class="add-register" id="add_register" data-table=${name}>Adicionar Registro</a>
-      <a class="add-column" id="add_register">Mostrar Registros</a>
-    </div>
+      <a class="add-column" id="show_register" data-table=${name}>Mostrar Registros</a>
+    </div> 
     </div>
 `
 }
@@ -61,7 +61,7 @@ function set_table_columns(html, table) {
     cadastro_columns.forEach(function(item) {
       html.innerHTML += `<th>${item}</th>`
     })
-  } else if (table == "Informações Pesagem") {
+  } else if (table == "Info_Pesagem") {
     info_pesagem_columns.forEach(function(item) {
       html.innerHTML += `<th>${item}</th>`
     })
