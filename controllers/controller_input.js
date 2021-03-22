@@ -1,12 +1,4 @@
-lote_columns = [
-  ["Lote", "auto-increment"],
-  ["Data de Chegada", "today"],
-  ["Frete", "number"],
-  ["Comissão", "number"],
-  ["Valor Animais", "number"],
-  ["Comprador", "text"],
-  ["Número de Animais", "number"]
-]
+lote_columns = ["Lote","Data de Chegada","Frete", "Comissão", "Valor Animais", "Comprador","Número de Animais"]
 cadastro_columns = ["ID", "Data de Chegada", "Peso de Chegada em Kg", "Peso @", "Lote", "Tamanho"]
 info_pesagem_columns = ["Número Pesagem", "Data da Pesagem", "U inf", "U sup", "P inf", "P sup", "M inf", "M sup", "G inf", "G sup"]
 pesagem_columns = ["Número Pesagem", "Gado ID", "Lote", "Check", "Kg", "Peso @", "Tamanho"]
@@ -23,8 +15,10 @@ columns_array = [
 document.addEventListener('click',function(e){
   if(e.target && e.target.id== 'add_register'){
     input_place = document.getElementsByClassName('action')[0]
-    table = e.target.getAttribute("data-table")
+    action_helper = document.getElementsByClassName('action-helper')[0]
     input_place.innerHTML = ""
+
+    table = e.target.getAttribute("data-table")
 
     columns_array.forEach(function(item) {
       if (item[0] == table) {
@@ -33,18 +27,39 @@ document.addEventListener('click',function(e){
           input_place.innerHTML += `
           <div class="modal-input">
             <span class="color-tip color"></span>
-            <label>${sub_item[0]}</label>
-            <input class='input' id="${sub_item[0]}">
+            <label>${sub_item}</label>
+            <input class='input' id="${sub_item}">
           </div>
           `
-          
-          input = document.getElementById(sub_item[0])
-          mask_input(input, sub_item[1], table)
         })
       }
     })
 
     input_place.innerHTML += `<button class=${table} id="save_record">Salvar Dados</button>`
+
+
+    //  Handle Pesagem Stuff
+    if (table == "Pesagem") {
+      load_pesagem_info(action_helper)
+
+      num_pesagem = document.getElementById('Número Pesagem')
+      gado_id = document.getElementById('Gado ID')
+      kg = document.getElementById('Kg')
+
+      num_pesagem.addEventListener('keyup', function(e) {
+        handle_num_pesagem(e)
+      })
+
+      gado_id.addEventListener('keyup', function(e) {
+        handle_gado_id(e)        
+      })
+
+      kg.addEventListener('keyup', function(e) {
+        handle_kg(e)        
+      })
+
+    }
+
 
    }
 });
@@ -63,4 +78,80 @@ function mask_input(input, type, table) {
     const today = `${dateValidator(date.getDate())}-${dateValidator(date.getMonth() + 1)}-${date.getFullYear()}`;
     input.value = today
   }
+}
+
+function load_pesagem_info(html) {
+  html.innerHTML = 
+  `
+  <br>
+  <h2>Informações da Pesagem</h2>
+  <table class="table-striped">
+  <thead>
+    <tr>
+      <th>Proj GMD</th>
+      <th>Desvio Padrão</th>
+      <th>Número de Animais</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+  </table>
+  <br>
+  <h2>Informações do Gado</h2>
+  <table class="table-striped">
+  <thead>
+    <tr>
+      <th>Comprador</th>
+      <th>Quanto comprou</th>
+      <th>GMD</th>
+      <th>GMD última pesagem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="buyer"></td>
+      <td class="price-gado"></td>
+      <td class="gmd"></td>
+      <td class="gmd-ultima-pesagem"></td>
+    </tr>
+  </tbody>
+</table>
+  `
+
+}
+
+function handle_gado_id(event) {
+  gado_relative_path = `../assets/database/cadastro.json`
+  lote_relative_path = `../assets/database/lote.json`
+
+  gado_db = require(gado_relative_path);
+  lote_db = require(lote_relative_path);
+
+  gado_info = gado_db["data"].filter(function (entry) {
+    return entry.ID == event.target.value
+  });
+
+  lote_info = lote_db["data"].filter(function (entry) {
+    return entry.Lote == gado_info[0]["Lote"]
+  });
+
+
+}
+
+function handle_kg(event) {
+
+}
+
+function handle_num_pesagem(event) {
+  database_relative_path = `../assets/database/pesagem.json`
+  database = require(database_relative_path);
+  
+  // Se ja tivermos alguma pesagem, loadar as infos
+
+
 }

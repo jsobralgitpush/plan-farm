@@ -22,7 +22,7 @@
     <script src="../controllers/controller_input.js"></script>
     <script src="../controllers/controller_save_record.js"></script>
     <script src="../controllers/controller_show_record.js"></script>
-    <script src="../controllers/controller_weighing.js"></script>
+    <script src="../controllers/controller_sales.js"></script>
     <script type="module" src="../assets/javascript/utils.js"></script>
     <!-- Importação de Controllers -->
 
@@ -70,6 +70,13 @@
                 </p>
                 <!-- Para cada tabela no db.json... -->
               </div>
+
+              <h5 class="nav-group-title">Calculadora</h5>
+              <div class="sales-div">
+                <p class="nav-group-item" id="sales">
+                  Vendas
+                </p>
+              </div>
               <!-- Menu de Tabelas -->
             </nav>
           </div>
@@ -86,8 +93,13 @@
                 <tbody>
               </table>
 
-              <div class="action">
+              <div class="action-menu">
+                <div class="action">
+                </div>
+                <div class="action-helper">
+                </div>
               </div>
+
             </div>
             <!-- Menu de Registros no formato de tabela -->
             <div class="metric">

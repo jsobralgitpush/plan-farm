@@ -215,3 +215,19 @@ input[type="date"] {
 .modal h3 {
   margin-bottom: 20px;
 }
+
+.action-menu {
+  display: inline-flex;
+  width: 100%;
+}
+
+.action {
+  width: 100%;
+
+}
+
+.action-helper {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}

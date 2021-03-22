@@ -6,6 +6,8 @@ window.addEventListener('load', function() {
 
   // Input Place
   var input_place = document.getElementsByClassName('action')[0]
+  var action_helper = document.getElementsByClassName('action-helper')[0]
+
 
   // Possíveis Tabelas
   var lote = document.getElementById('lote')
@@ -16,7 +18,10 @@ window.addEventListener('load', function() {
   var chuva = document.getElementById('chuva')
   var sal = document.getElementById('sal')
 
-  var array_tables = [lote, cadastro, info_pesagem, pesagem, financeiro, chuva, sal]
+  // Sales
+  var vendas = document.getElementById('sales')
+
+  var array_tables = [lote, cadastro, info_pesagem, pesagem, financeiro, chuva, sal, vendas]
 
   // Adicionar nome e botões de interação nas tabelas
   array_tables.forEach(function(item) {
@@ -24,6 +29,7 @@ window.addEventListener('load', function() {
       // Zerando informações
       table_body.innerHTML = ""
       input_place.innerHTML = ""
+      action_helper.innerHTML = ""
 
       set_table(table_title, item.textContent)
       set_table_columns(table_head, item.textContent.trim())

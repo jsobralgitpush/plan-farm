@@ -1,16 +1,17 @@
-database_relative_path = "../assets/database/db.json"
 
 document.addEventListener('click',function(e){
   if(e.target && e.target.id== 'show_register'){
-    database = require(database_relative_path);
     table = e.target.getAttribute("data-table")
-    values = Object.values(database[table]);
+    database_relative_path = `../assets/database/${table.toLowerCase()}.json`
+    database = require(database_relative_path);
+    values = Object.values(database["data"]);
     table_body = document.getElementsByClassName('table-body')
 
     for (let item of values) {
       td_to_insert = ""
 
       Object.keys(item).forEach(function (key) { 
+        if (key == "db_ID") return
         td_to_insert += `<td>${item[key]}</td>`
       })
 
