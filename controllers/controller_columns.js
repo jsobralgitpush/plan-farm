@@ -2,6 +2,7 @@ window.addEventListener('load', function() {
   // Table head para adicionarmos colunas, botões e título
   var table_head = document.getElementsByClassName("table-head")[0]
   var table_title = document.getElementsByClassName("buttons-show")[0]
+  var table_body = document.getElementsByClassName('table-body')[0]
 
   // Input Place
   var input_place = document.getElementsByClassName('action')[0]
@@ -20,7 +21,10 @@ window.addEventListener('load', function() {
   // Adicionar nome e botões de interação nas tabelas
   array_tables.forEach(function(item) {
     item.addEventListener('click', function() {
+      // Zerando informações
+      table_body.innerHTML = ""
       input_place.innerHTML = ""
+
       set_table(table_title, item.textContent)
       set_table_columns(table_head, item.textContent.trim())
     })

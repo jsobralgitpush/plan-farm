@@ -1,4 +1,12 @@
-lote_columns = ["Lote", "Data de Chegada", "Frete", "Comissão", "Valor Animais", "Comprador", "Número de Animais"]
+lote_columns = [
+  ["Lote", "auto-increment"],
+  ["Data de Chegada", "today"],
+  ["Frete", "number"],
+  ["Comissão", "number"],
+  ["Valor Animais", "number"],
+  ["Comprador", "text"],
+  ["Número de Animais", "number"]
+]
 cadastro_columns = ["ID", "Data de Chegada", "Peso de Chegada em Kg", "Peso @", "Lote", "Tamanho"]
 info_pesagem_columns = ["Número Pesagem", "Data da Pesagem", "U inf", "U sup", "P inf", "P sup", "M inf", "M sup", "G inf", "G sup"]
 pesagem_columns = ["Número Pesagem", "Gado ID", "Lote", "Check", "Kg", "Peso @", "Tamanho"]
@@ -25,10 +33,13 @@ document.addEventListener('click',function(e){
           input_place.innerHTML += `
           <div class="modal-input">
             <span class="color-tip color"></span>
-            <label>${sub_item}</label>
-            <input class='input' id="${sub_item}" type="number">
+            <label>${sub_item[0]}</label>
+            <input class='input' id="${sub_item[0]}">
           </div>
           `
+          
+          input = document.getElementById(sub_item[0])
+          mask_input(input, sub_item[1], table)
         })
       }
     })
@@ -37,3 +48,19 @@ document.addEventListener('click',function(e){
 
    }
 });
+
+function dateValidator(date) {
+  return date < 10 ? "0" + date : date;
+}
+
+function mask_input(input, type, table) {
+  if (type == "auto-increment") {
+    database_relative_path = `../assets/database/${table.toLowerCase()}.json`
+    database = require(database_relative_path);
+    // input.value = "a"
+  } else if (type == "today") {
+    const date = new Date();
+    const today = `${dateValidator(date.getDate())}-${dateValidator(date.getMonth() + 1)}-${date.getFullYear()}`;
+    input.value = today
+  }
+}

@@ -11,16 +11,15 @@ document.addEventListener('click',function(e){
       td_to_insert = ""
 
       Object.keys(item).forEach(function (key) { 
-        td_to_insert += `<td>${key}</td>`
+        td_to_insert += `<td>${item[key]}</td>`
       })
 
-      table_body[0].insertRow(
-        `
-        <tr>
-          ${td_to_insert}
-        </tr>
-        `
-      )
+      table_body[0].innerHTML += 
+      `
+      <tr>
+        ${td_to_insert}
+      </tr>
+      `
     }
   }
 })

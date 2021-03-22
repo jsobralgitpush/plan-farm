@@ -8,9 +8,27 @@
       "Valor Animais": "5000",
       "Comprador": "41",
       "Número de Animais": "24"
+    },
+    {
+      "Lote": "1",
+      "Data de Chegada": "",
+      "Frete": "1000",
+      "Comissão": "1000",
+      "Valor Animais": "1000",
+      "Comprador": "5522",
+      "Número de Animais": "145"
     }
   ],
-  "Cadastro": [],
+  "Cadastro": [
+    {
+      "ID": "1",
+      "Data de Chegada": "",
+      "Peso de Chegada em Kg": "214",
+      "Peso @": "214",
+      "Lote": "245",
+      "Tamanho": "214"
+    }
+  ],
   "Info_Pesagem": [],
   "Pesagem": [],
   "Financeiro": [],
