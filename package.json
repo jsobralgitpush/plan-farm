@@ -26,7 +26,7 @@
   },
   "build": {
     "appId": "com.platform.app",
-    "target": "zip",
+    "target": "portable",
     "productName": "Farm",
     "directories": {
       "output": "build"
