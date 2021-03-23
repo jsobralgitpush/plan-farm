@@ -1,7 +1,7 @@
 lote_columns = ["Lote","Data de Chegada","Frete", "Comissão", "Valor Animais", "Comprador","Número de Animais"]
 cadastro_columns = ["ID", "Data de Chegada", "Peso de Chegada em Kg", "Peso @", "Lote", "Tamanho"]
-info_pesagem_columns = ["Número Pesagem", "Data da Pesagem", "U inf", "U sup", "P inf", "P sup", "M inf", "M sup", "G inf", "G sup"]
-pesagem_columns = ["Número Pesagem", "Gado ID", "Lote", "Check", "Kg", "Peso @", "Tamanho"]
+info_pesagem_columns = ["Número_Pesagem", "Data da Pesagem", "U inf", "U sup", "P inf", "P sup", "M inf", "M sup", "G inf", "G sup"]
+pesagem_columns = ["Número_Pesagem", "Gado ID", "Lote", "Check", "Kg", "Peso @", "Tamanho"]
 financeiro_columns = ["Data", "Valor", "Classificação", "Subclassificação", "Comentário"]
 
 columns_array = [
@@ -42,43 +42,27 @@ document.addEventListener('click',function(e){
     if (table == "Pesagem") {
       load_pesagem_info(action_helper)
 
-      num_pesagem = document.getElementById('Número Pesagem')
+      num_pesagem = document.getElementById('Número_Pesagem')
       gado_id = document.getElementById('Gado ID')
       kg = document.getElementById('Kg')
 
-      num_pesagem.addEventListener('keyup', function(e) {
+      num_pesagem.addEventListener('change', function(e) {
         handle_num_pesagem(e)
       })
 
-      gado_id.addEventListener('keyup', function(e) {
+      gado_id.addEventListener('change', function(e) {
         handle_gado_id(e)        
       })
 
-      kg.addEventListener('keyup', function(e) {
+      kg.addEventListener('change', function(e) {
         handle_kg(e)        
       })
-
     }
 
 
    }
 });
 
-function dateValidator(date) {
-  return date < 10 ? "0" + date : date;
-}
-
-function mask_input(input, type, table) {
-  if (type == "auto-increment") {
-    database_relative_path = `../assets/database/${table.toLowerCase()}.json`
-    database = require(database_relative_path);
-    // input.value = "a"
-  } else if (type == "today") {
-    const date = new Date();
-    const today = `${dateValidator(date.getDate())}-${dateValidator(date.getMonth() + 1)}-${date.getFullYear()}`;
-    input.value = today
-  }
-}
 
 function load_pesagem_info(html) {
   html.innerHTML = 
@@ -95,9 +79,9 @@ function load_pesagem_info(html) {
   </thead>
   <tbody>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td class="proj-gmd"></td>
+      <td class="error"></td>
+      <td class="animals-amount"></td>
     </tr>
   </tbody>
   </table>
@@ -129,8 +113,8 @@ function handle_gado_id(event) {
   gado_relative_path = `../assets/database/cadastro.json`
   lote_relative_path = `../assets/database/lote.json`
 
-  gado_db = require(gado_relative_path);
-  lote_db = require(lote_relative_path);
+  let gado_db = require(gado_relative_path);
+  let lote_db = require(lote_relative_path);
 
   gado_info = gado_db["data"].filter(function (entry) {
     return entry.ID == event.target.value
@@ -140,18 +124,65 @@ function handle_gado_id(event) {
     return entry.Lote == gado_info[0]["Lote"]
   });
 
-
+  let buyer = document.getElementsByClassName('buyer')[0]
+  return buyer.innerHTML = lote_info[0]["Comprador"]
 }
 
 function handle_kg(event) {
+  let pesagem_relative_path = `../assets/database/pesagem.json`
+  let gado_relative_path = `../assets/database/cadastro.json`
+
+  let gado_db = require(gado_relative_path);
+  let pesagem_db = require(pesagem_relative_path);
+
+  let pesagem_info = pesagem_db["data"].filter(function (entry) {
+    return entry.Número_Pesagem == event.target.value
+  });
+
+  gado_id = document.getElementById('Gado ID')
+  let gado_info = gado_db["data"].filter(function (entry) {
+    return entry.Número_Pesagem == gado_id.value
+  });
+
+  // GMD
 
 }
 
 function handle_num_pesagem(event) {
-  database_relative_path = `../assets/database/pesagem.json`
-  database = require(database_relative_path);
-  
-  // Se ja tivermos alguma pesagem, loadar as infos
+  let pesagem_relative_path = `../assets/database/pesagem.json`
+
+  let pesagem_db = require(pesagem_relative_path);
+
+  let pesagem_info = pesagem_db["data"].filter(function (entry) {
+    return entry.Número_Pesagem == event.target.value && entry.Check == "OK"
+  });
+
+  // Quantidade de Animais
+  let animals = document.getElementsByClassName('animals-amount')[0]
+  return animals.innerHTML = pesagem_info.length
+
+  // Gmd Proj
+
+
+  // Desvio Padrão
 
 
 }
+
+
+function total_gmd(days, arrive_weight, today_weight) {
+  return (parseFloat(today_weight) - parseFloat(arrive_weight)) / days
+}
+
+function count_farms_day(today, arrive) {
+  var today_parts = today.split('-')
+  var arrive_parts = arrive.split('-')
+
+  var today_date = new Date(today_parts[2], today_parts[1] - 1, today_parts[0])
+  var arrive_data = new Date(arrive_parts[2], arrive_parts[1] - 1, arrive_parts[0])
+
+  return (today_date - arrive_data) / (1000*3600*24)
+}
+
+//dias_na_fazenda = count_farms_day(match_rebanho[0]["Data do Rebanho"], match_gado[0]["Data de chegada"])
+//gmd_total = total_gmd(dias_na_fazenda, match_gado[0]["Peso @"], $('.peso-arroba').val())

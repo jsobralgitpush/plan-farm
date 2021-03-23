@@ -18,6 +18,7 @@ document.addEventListener('click',function(e){
     to_insert["db_ID"] = database["next"]
 
     // Caso seja a tabela da pesagem, guardar gmd e gmd última pesagem
+    if table == "Pesagem" to_insert["GMD"] = handle_pesagem()
 
     fs.readFile(database_absolute_path, "utf8", function readFileCallback(err, data) {
       if (err) {
@@ -39,3 +40,8 @@ document.addEventListener('click',function(e){
   }
 
 });
+
+function handle_pesagem() {
+  let gmd = document.getElementsByClassName('gmd')[0]
+  return gmd.value
+}
