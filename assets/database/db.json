@@ -1,271 +1,37 @@
 {
-  "Cadastro": {
-    "schema": {
-      "ID": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "",
-        "select": ""
-      },
-      "Data de chegada": {
-        "dataType": "today",
-        "inputType": "date",
-        "defaultValue": "today",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Peso de chegada em Kg": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Teste de comentário 3",
-        "select": ""
-      },
-      "Peso @": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Teste de comentário 4",
-        "select": "",
-        "defaultValue": "kg_to_@"
-      },
-      "Lote": {
-        "dataType": "",
-        "inputType": "select",
-        "comment": "Teste de comentário 6",
-        "select": "Lote"
-      },
-      "Tamanho": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Teste de comentário 6",
-        "select": ""
-      }
+  "Lote": [
+    {
+      "Lote": "1",
+      "Data de Chegada": "",
+      "Frete": "2000",
+      "Comissão": "3000",
+      "Valor Animais": "5000",
+      "Comprador": "41",
+      "Número de Animais": "24"
     },
-    "data": []
-  },
-  "Lote": {
-    "schema": {
-      "Lote": {
-        "dataType": "auto_increment",
-        "inputType": "fixed",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "auto_increment",
-        "select": ""
-      },
-      "Data de Chegada": {
-        "dataType": "today",
-        "inputType": "date",
-        "defaultValue": "today",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Frete": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Comissão": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Valor Animais": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Comprador": {
-        "dataType": "",
-        "inputType": "text",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Número de Animais": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      }
-    },
-    "data": []
-  },
-  "Pesagem": {
-    "schema": {
-      "Rebanho": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "",
-        "select": ""
-      },
-      "Gado_ID": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "",
-        "select": ""
-      },
-      "Lote": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "",
-        "select": ""
-      },
-      "Check": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Kg": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Peso @": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Teste de comentário 4",
-        "select": "",
-        "defaultValue": "kg_to_@"
-      },
-      "Tamanho": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Teste de comentário 4",
-        "select": "",
-        "defaultValue": ""
-      }
-    },
-    "data": [
-    ]
-  },
-  "Financeiro": {
-    "schema": {
-      "Data": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "",
-        "select": ""
-      },
-      "Valor": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "",
-        "select": ""
-      },
-      "Classificação": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Subclassificação": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "Comentário": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      }
-    },
-    "data": []
-  },
-  "Rebanho": {
-    "schema": {
-      "ID": {
-        "dataType": "auto_increment",
-        "inputType": "fixed",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "auto_increment",
-        "select": ""
-      },
-      "Data do Rebanho": {
-        "dataType": "today",
-        "inputType": "date",
-        "defaultValue": "today",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "U inferior": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Número do Animal, correspondente ao ID",
-        "minRange": "10",
-        "maxRange": "100",
-        "defaultValue": "",
-        "select": ""
-      },
-      "U superior": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "P inferior": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "P superior": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "M inferior": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "M superior": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "G inferior": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      },
-      "G superior": {
-        "dataType": "",
-        "inputType": "number",
-        "comment": "Quando o animal chegou na fazendo",
-        "select": ""
-      }
-    },
-    "data": []
-  }
+    {
+      "Lote": "1",
+      "Data de Chegada": "",
+      "Frete": "1000",
+      "Comissão": "1000",
+      "Valor Animais": "1000",
+      "Comprador": "5522",
+      "Número de Animais": "145"
+    }
+  ],
+  "Cadastro": [
+    {
+      "ID": "1",
+      "Data de Chegada": "",
+      "Peso de Chegada em Kg": "214",
+      "Peso @": "214",
+      "Lote": "245",
+      "Tamanho": "214"
+    }
+  ],
+  "Info_Pesagem": [],
+  "Pesagem": [],
+  "Financeiro": [],
+  "Chuva": [],
+  "Sal": []
 }
