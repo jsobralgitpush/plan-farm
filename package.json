@@ -26,7 +26,6 @@
   },
   "build": {
     "appId": "com.platform.app",
-    "target": "NSIS",
     "productName": "Farm",
     "directories": {
       "output": "build"
