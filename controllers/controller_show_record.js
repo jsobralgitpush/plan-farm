@@ -11,7 +11,7 @@ document.addEventListener('click',function(e){
       td_to_insert = ""
 
       Object.keys(item).forEach(function (key) { 
-        if (key == "db_ID" || key == "GMD") return
+        if (key == "db_ID") return
         td_to_insert += `<td>${item[key]}</td>`
       })
 

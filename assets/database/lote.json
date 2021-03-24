@@ -1,15 +1,1 @@
-{
-  "next": 4,
-  "data": [
-    {
-      "Lote": "1",
-      "Data de Chegada": "22-03-2021",
-      "Frete": "1000",
-      "Comissão": "500",
-      "Valor Animais": "3000",
-      "Comprador": "Marcelo",
-      "Número de Animais": "30",
-      "ID": 3
-    }
-  ]
-}
+{"next":5,"data":[{"Lote":"1","Data_de_Chegada":"24-03-2021","Frete":"3000","Comissão":"2000","Valor Animais":"1000","Comprador":"Marcelo","Numero_de_Animais":"50","db_ID":4}]}

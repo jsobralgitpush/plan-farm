@@ -1,15 +1,38 @@
 {
-  "next": 3,
+  "next": 14,
   "data": [
     {
-      "Número_Pesagem": "1",
-      "Gado ID": "1",
+      "Numero_Pesagem": "1",
+      "Gado_ID": "1",
+      "Lote": "1",
+      "Check": "1",
+      "Kg": "90",
+      "Peso_@": "3",
+      "Tamanho": "1",
+      "GMD": "0.007272727272727273",
+      "db_ID": 11
+    },
+    {
+      "Numero_Pesagem": "1",
+      "Gado_ID": "1",
       "Lote": "1",
       "Check": "OK",
-      "Kg": "1",
-      "Peso @": "1",
-      "Tamanho": "1",
-      "db_ID": 2
+      "Kg": "60",
+      "Peso_@": "2",
+      "Tamanho": "",
+      "GMD": "0.0036363636363636364",
+      "db_ID": 12
+    },
+    {
+      "Numero_Pesagem": "1",
+      "Gado_ID": "1",
+      "Lote": "1",
+      "Check": "1",
+      "Kg": "3",
+      "Peso_@": "0.1",
+      "Tamanho": "",
+      "GMD": "-0.0032727272727272726",
+      "db_ID": 13
     }
   ]
 }

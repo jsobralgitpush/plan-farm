@@ -55,10 +55,10 @@ function set_table(html, name) {
 function set_table_columns(html, table) {
   html.innerHTML = ""
 
-  lote_columns = ["Lote", "Data de Chegada", "Frete", "Comissão", "Valor_Animais", "Comprador", "Número_de_Animais"]
-  cadastro_columns = ["ID", "Data de Chegada", "Peso_de_Chegada_em_Kg", "Peso @", "Lote", "Tamanho"]
+  lote_columns = ["Lote", "Data_de_Chegada", "Frete", "Comissão", "Valor_Animais", "Comprador", "Numero_de_Animais"]
+  cadastro_columns = ["ID", "Data_de_Chegada", "Peso_de_Chegada_em_Kg", "Peso_@", "Lote", "Tamanho"]
   info_pesagem_columns = ["Numero_Pesagem", "Data_da_Pesagem", "U_inf", "U_sup", "P_inf", "P_sup", "M_inf", "M_sup", "G_inf", "G_sup"]
-  pesagem_columns = ["Numero_Pesagem", "Gado_ID", "Lote", "Check", "Kg", "Peso @", "Tamanho"]
+  pesagem_columns = ["Numero_Pesagem", "Gado_ID", "Lote", "Check", "Kg", "Peso @", "Tamanho", "GMD"]
   financeiro_columns = ["Data", "Valor", "Classificação", "Subclassificação", "Comentário"]
   chuva_columns = []
   sal_columns = []

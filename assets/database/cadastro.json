@@ -1,125 +1,32 @@
 {
-  "next": 2,
+  "next": 4,
   "data": [
     {
-      "ID": 1,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
+      "ID": "1",
+      "Data_de_Chegada": "24-03-2021",
+      "Peso_de_Chegada_em_Kg": "30",
+      "Peso_@": "1",
       "Lote": "1",
-      "Tamanho": "U"
+      "Tamanho": "U",
+      "db_ID": 1
     },
     {
-      "ID": 2,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
+      "ID": "2",
+      "Data_de_Chegada": "24-03-2021",
+      "Peso_de_Chegada_em_Kg": "30",
+      "Peso_@": "1",
       "Lote": "1",
-      "Tamanho": "U"
+      "Tamanho": "U",
+      "db_ID": 2
     },
     {
-      "ID": 3,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
+      "ID": "3",
+      "Data_de_Chegada": "24-03-2021",
+      "Peso_de_Chegada_em_Kg": "30",
+      "Peso_@": "1",
       "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 4,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 5,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 6,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 7,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 8,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 9,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 10,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 11,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 12,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 13,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 14,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
-    },
-    {
-      "ID": 15,
-      "Data de Chegada": "22-03-2021",
-      "Peso de Chegada em Kg": "30",
-      "Peso @": "1",
-      "Lote": "1",
-      "Tamanho": "U"
+      "Tamanho": "U",
+      "db_ID": 3
     }
   ]
 }

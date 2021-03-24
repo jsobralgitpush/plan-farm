@@ -1,7 +1,7 @@
-lote_columns = ["Lote","Data de Chegada","Frete", "Comissão", "Valor Animais", "Comprador","Número de Animais"]
-cadastro_columns = ["ID", "Data de Chegada", "Peso de Chegada em Kg", "Peso @", "Lote", "Tamanho"]
-info_pesagem_columns = ["Número_Pesagem", "Data da Pesagem", "U inf", "U sup", "P inf", "P sup", "M inf", "M sup", "G inf", "G sup"]
-pesagem_columns = ["Número_Pesagem", "Gado ID", "Lote", "Check", "Kg", "Peso @", "Tamanho"]
+lote_columns = ["Lote","Data_de_Chegada","Frete", "Comissão", "Valor Animais", "Comprador","Numero_de_Animais"]
+cadastro_columns = ["ID", "Data_de_Chegada", "Peso_de_Chegada_em_Kg", "Peso_@", "Lote", "Tamanho"]
+info_pesagem_columns = ["Numero_Pesagem", "Data_da_Pesagem", "U_inf", "U_sup", "P_inf", "P_sup", "M_inf", "M_sup", "G_inf", "G_sup"]
+pesagem_columns = ["Numero_Pesagem", "Gado_ID", "Lote", "Check", "Kg", "Peso_@", "Tamanho", "GMD"]
 financeiro_columns = ["Data", "Valor", "Classificação", "Subclassificação", "Comentário"]
 
 columns_array = [
@@ -41,73 +41,17 @@ document.addEventListener('click',function(e){
     //  Handle Pesagem Stuff
     if (table == "Pesagem") {
       load_pesagem_info(action_helper)
-
-      num_pesagem = document.getElementById('Número_Pesagem')
-      gado_id = document.getElementById('Gado ID')
-      kg = document.getElementById('Kg')
-
-      num_pesagem.addEventListener('change', function(e) {
-        handle_num_pesagem(e)
+      
+      let calculadora = document.getElementById('calcular')
+      
+      calculadora.addEventListener('click', function() {
+        getMetricasPesagem()
       })
-
-      gado_id.addEventListener('change', function(e) {
-        handle_gado_id(e)        
-      })
-
-      kg.addEventListener('change', function(e) {
-        handle_kg(e)        
-      })
-    }
-
-
    }
-});
+
+}})
 
 
-function load_pesagem_info(html) {
-  html.innerHTML = 
-  `
-  <br>
-  <h2>Informações da Pesagem</h2>
-  <table class="table-striped">
-  <thead>
-    <tr>
-      <th>Proj GMD</th>
-      <th>Desvio Padrão</th>
-      <th>Número de Animais</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="proj-gmd"></td>
-      <td class="error"></td>
-      <td class="animals-amount"></td>
-    </tr>
-  </tbody>
-  </table>
-  <br>
-  <h2>Informações do Gado</h2>
-  <table class="table-striped">
-  <thead>
-    <tr>
-      <th>Comprador</th>
-      <th>Quanto comprou</th>
-      <th>GMD</th>
-      <th>GMD última pesagem</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="buyer"></td>
-      <td class="price-gado"></td>
-      <td class="gmd"></td>
-      <td class="gmd-ultima-pesagem"></td>
-    </tr>
-  </tbody>
-</table>
-  `
-
-}
 
 function handle_gado_id(event) {
   gado_relative_path = `../assets/database/cadastro.json`
@@ -136,39 +80,74 @@ function handle_kg(event) {
   let pesagem_db = require(pesagem_relative_path);
 
   let pesagem_info = pesagem_db["data"].filter(function (entry) {
-    return entry.Número_Pesagem == event.target.value
+    return entry.Numero_Pesagem == event.target.value
   });
 
-  gado_id = document.getElementById('Gado ID')
+  gado_id = document.getElementById('Gado_ID')
   let gado_info = gado_db["data"].filter(function (entry) {
-    return entry.Número_Pesagem == gado_id.value
+    return entry.Numero_Pesagem == gado_id.value
   });
 
   // GMD
+  //dias_na_fazenda = count_farms_day(, gado_info[0]["Data_de_Chegada"])
+  //gmd_total = total_gmd(dias_na_fazenda, match_gado[0]["Peso @"], $('.peso-arroba').val())
 
 }
 
-function handle_num_pesagem(event) {
-  let pesagem_relative_path = `../assets/database/pesagem.json`
 
-  let pesagem_db = require(pesagem_relative_path);
-
-  let pesagem_info = pesagem_db["data"].filter(function (entry) {
-    return entry.Número_Pesagem == event.target.value && entry.Check == "OK"
-  });
-
-  // Quantidade de Animais
-  let animals = document.getElementsByClassName('animals-amount')[0]
-  return animals.innerHTML = pesagem_info.length
-
-  // Gmd Proj
-
-
-  // Desvio Padrão
-
+function load_pesagem_info(html) {
+  html.innerHTML = 
+  `
+  <br>
+  <h2>Informações da Pesagem</h2>
+  <table class="table-striped">
+  <thead>
+    <tr>
+      <th>Proj GMD</th>
+      <th>Desvio Padrão</th>
+      <th>Numero de Animais</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="proj-gmd"></td>
+      <td id="desvio"></td>
+      <td id="animals-amount"></td>
+    </tr>
+  </tbody>
+  </table>
+  <br>
+  <h2>Informações do Gado</h2>
+  <table class="table-striped">
+  <thead>
+    <tr>
+      <th>Comprador</th>
+      <th>Quanto comprou</th>
+      <th>GMD</th>
+      <th>GMD última pesagem</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="buyer"></td>
+      <td id="price-gado"></td>
+      <td id="gmd-amount"></td>
+      <td id="gmd-ultima-pesagem"></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<button id="calcular">Calcular Métricas</button>
+  `
 
 }
 
+
+function getDesvioPadrao (array) {
+  const n = array.length
+  const mean = array.reduce((a, b) => a + b) / n
+  return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
+}
 
 function total_gmd(days, arrive_weight, today_weight) {
   return (parseFloat(today_weight) - parseFloat(arrive_weight)) / days
@@ -184,5 +163,148 @@ function count_farms_day(today, arrive) {
   return (today_date - arrive_data) / (1000*3600*24)
 }
 
-//dias_na_fazenda = count_farms_day(match_rebanho[0]["Data do Rebanho"], match_gado[0]["Data de chegada"])
-//gmd_total = total_gmd(dias_na_fazenda, match_gado[0]["Peso @"], $('.peso-arroba').val())
+function getMetricasPesagem() {
+  const gado_relative_path = `../assets/database/cadastro.json`
+  const info_pesagem_relative_path = `../assets/database/info_pesagem.json`
+  const pesagem_relative_path = `../assets/database/pesagem.json`
+  const lote_relative_path = `../assets/database/lote.json`
+
+  var gado_db = require(gado_relative_path);
+  var info_pesagem_db = require(info_pesagem_relative_path);
+  var pesagem_db = require(pesagem_relative_path);
+  var lote_db = require(lote_relative_path);
+
+  const gado_id = document.getElementById('Gado_ID')
+  const info_pesagem_id = document.getElementById('Numero_Pesagem')
+  // gamb
+  const kg = document.getElementById('Kg')
+  // gamb
+  const ultima_pesagem = parseInt(info_pesagem_id.value) - 1
+  var sum_gmd = 0
+  var array_gmd = []
+
+  var gado_info = gado_db["data"].filter(function (entry) {
+    return entry.ID == gado_id.value
+  });
+
+  var info_pesagem_info = info_pesagem_db["data"].filter(function (entry) {
+    return entry.Numero_Pesagem == info_pesagem_id.value
+  });
+
+  var pesagem_info = pesagem_db["data"].filter(function (entry) {
+    return entry.Gado_ID == gado_id.value && entry.Numero_Pesagem == ultima_pesagem
+  });
+
+  var lote_info = lote_db["data"].filter(function (entry) {
+    return entry.Lote == gado_info[0]["Lote"]
+  });
+
+  const animais_pesagem = pesagem_db["data"].filter(function (entry) {
+    return entry.Numero_Pesagem == info_pesagem_id.value && entry.Check == "OK"
+  });
+
+  var td_proj_gmd = document.getElementById('proj-gmd')
+  var td_desvio = document.getElementById('desvio')
+  var td_qtd_animais = document.getElementById('animals-amount')
+  var td_comprador = document.getElementById('buyer')
+  var td_gmd = document.getElementById('gmd-amount')
+  var td_gmd_ult_pesagem = document.getElementById('gmd-ultima-pesagem')
+
+  // Num Animais
+  try {
+    num_animais = animais_pesagem.length
+    td_qtd_animais.innerHTML = num_animais
+  } catch (e) {
+    console.log("=== NUMERO ANIMAIS ===")
+    console.log(e)
+    console.log("=== NUMERO ANIMAIS ===")
+    num_animais = "Erro ao calcular o numero de animais"
+    td_qtd_animais.innerHTML = num_animais
+  }
+
+  // Comprador
+  try {
+    const comprador = lote_info[0]["Comprador"]
+    td_comprador.innerHTML = comprador
+  } catch (e) {
+    console.log("=== COMPRADOR ===")
+    console.log(e)
+    console.log("=== COMPRADOR ===")
+    const comprador = "Não foi possível achar o comprador"
+    td_comprador.innerHTML = comprador
+  } 
+  
+  // GMD 
+  try {
+    const data_da_pesagem = info_pesagem_info[0]["Data_da_Pesagem"]
+    const data_de_chegada = gado_info[0]["Data_de_Chegada"]
+    const peso_inicial = gado_info[0]["Peso_@"]
+    //let peso_atual = document.getElementById('Peso_@')
+    const peso_atual = kg.value / 30
+    const total_dias_gado = count_farms_day(data_da_pesagem, data_de_chegada)
+    const gmd = total_gmd(total_dias_gado, peso_inicial, peso_atual)
+    td_gmd.innerHTML = gmd
+
+
+    // GAAAMB
+    var gmd_input = document.getElementById('GMD')
+    gmd_input.value = gmd
+    // GAAAMB
+  } catch (e) {
+    console.log("=== GMD ===")
+    console.log(e)
+    console.log("=== GMD ===")
+    const gmd = "Erro no calculo"
+    td_gmd.innerHTML = gmd
+  }
+    
+  // GMD ult Pesagem
+  try {
+    if (animais_pesagem.length > 0) {
+      gmd_ult_pesagem = pesagem_info[0]["GMD"]
+    } else {
+      gmd_ult_pesagem = "primeira pesagem"
+    }
+    td_gmd_ult_pesagem.innerHTML = gmd_ult_pesagem
+  } catch (e) {
+   console.log("=== GMD ult Pes ===")
+   console.log(e)
+   console.log("=== GMD ult Pes ===")
+   const gmd_ult_pesagem = "Primeira Pesagem"
+   td_gmd_ult_pesagem.innerHTML = gmd_ult_pesagem
+  }
+
+  // Proj GMD
+  try {
+    animais_pesagem.forEach(function(item) {
+      Object.keys(item).forEach(function (key) { 
+        if (key == "GMD") {
+          sum_gmd += parseFloat(item[key])
+          array_gmd.push(item[key])
+        }
+        })
+    })
+    console.log(sum_gmd)
+    console.log(num_animais)
+    const proj_gmd = sum_gmd / num_animais
+    td_proj_gmd.innerHTML = proj_gmd
+  } catch (e) {
+    console.log("=== PROJ GMD ===")
+    console.log(e)
+    console.log("=== PROJ GMD ===")
+    td_proj_gmd.innerHTML = "Primeira Pesagem"
+  } 
+  
+  // Desvio Padrao
+  try {
+    const desvio_padrao = getDesvioPadrao(array_gmd)
+    td_desvio.innerHTML = desvio_padrao
+  } catch (e) {
+    console.log("=== DESVIO PADRÃO ===")
+    console.log(e)
+    console.log("=== DESVIO PADRÃO ===")
+    const desvio_padrao = 0
+    td_desvio.innerHTML = desvio_padrao
+  } 
+}
+

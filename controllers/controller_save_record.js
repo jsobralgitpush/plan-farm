@@ -1,11 +1,12 @@
 var fs = require("fs");
 
-document.addEventListener('click',function(e){
-  if(e.target && e.target.id== 'save_record'){
+document.addEventListener('click', function (e) {
+  if (e.target && e.target.id == 'save_record') {
     table = e.target.className
     database_absolute_path = __dirname.replace('/views', `/assets/database/${table.toLowerCase()}.json`)
     database_relative_path = `../assets/database/${table.toLowerCase()}.json`
     database = require(database_relative_path);
+
 
     to_insert = {}
 
@@ -16,9 +17,6 @@ document.addEventListener('click',function(e){
     }
 
     to_insert["db_ID"] = database["next"]
-
-    // Caso seja a tabela da pesagem, guardar gmd e gmd última pesagem
-    if table == "Pesagem" to_insert["GMD"] = handle_pesagem()
 
     fs.readFile(database_absolute_path, "utf8", function readFileCallback(err, data) {
       if (err) {
@@ -42,6 +40,5 @@ document.addEventListener('click',function(e){
 });
 
 function handle_pesagem() {
-  let gmd = document.getElementsByClassName('gmd')[0]
-  return gmd.value
+  console.log(gmd)
 }
