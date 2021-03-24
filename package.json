@@ -26,7 +26,8 @@
   },
   "build": {
     "appId": "com.platform.app",
-    "productName": "linux",
+    "target": "linux",
+    "productName": "Farm",
     "directories": {
       "output": "build"
     }
