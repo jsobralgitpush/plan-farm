@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder -mwl"
+    "dist": "electron-builder"
   },
   "repository": "https://github.com/jsobralgitpush/plan-farm.git",
   "keywords": [
@@ -28,7 +28,8 @@
   },
   "build": {
     "appId": "com.platform.app",
-    "target": "NSIS",
+    "icon": "build/icon.ico",
+    "target": "nsis",
     "productName": "Farm",
     "directories": {
       "output": "build"
