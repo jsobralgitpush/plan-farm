@@ -37,7 +37,6 @@ document.addEventListener('click',function(e){
 
     input_place.innerHTML += `<button class=${table} id="save_record">Salvar Dados</button>`
 
-
     //  Handle Pesagem Stuff
     if (table == "Pesagem") {
       load_pesagem_info(action_helper)
@@ -50,49 +49,6 @@ document.addEventListener('click',function(e){
    }
 
 }})
-
-
-
-function handle_gado_id(event) {
-  gado_relative_path = `../assets/database/cadastro.json`
-  lote_relative_path = `../assets/database/lote.json`
-
-  let gado_db = require(gado_relative_path);
-  let lote_db = require(lote_relative_path);
-
-  gado_info = gado_db["data"].filter(function (entry) {
-    return entry.ID == event.target.value
-  });
-
-  lote_info = lote_db["data"].filter(function (entry) {
-    return entry.Lote == gado_info[0]["Lote"]
-  });
-
-  let buyer = document.getElementsByClassName('buyer')[0]
-  return buyer.innerHTML = lote_info[0]["Comprador"]
-}
-
-function handle_kg(event) {
-  let pesagem_relative_path = `../assets/database/pesagem.json`
-  let gado_relative_path = `../assets/database/cadastro.json`
-
-  let gado_db = require(gado_relative_path);
-  let pesagem_db = require(pesagem_relative_path);
-
-  let pesagem_info = pesagem_db["data"].filter(function (entry) {
-    return entry.Numero_Pesagem == event.target.value
-  });
-
-  gado_id = document.getElementById('Gado_ID')
-  let gado_info = gado_db["data"].filter(function (entry) {
-    return entry.Numero_Pesagem == gado_id.value
-  });
-
-  // GMD
-  //dias_na_fazenda = count_farms_day(, gado_info[0]["Data_de_Chegada"])
-  //gmd_total = total_gmd(dias_na_fazenda, match_gado[0]["Peso @"], $('.peso-arroba').val())
-
-}
 
 
 function load_pesagem_info(html) {
