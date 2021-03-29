@@ -16,6 +16,10 @@ document.addEventListener('click', function (e) {
       comissao.setAttribute("type", "number")
       valor_animais.setAttribute("type", "number")
       numero_de_animais.setAttribute("type", "number")
+    } else if (table == "Cadastro") {
+      let data_de_chegada = document.getElementById('Data_de_Chegada')
+      data_de_chegada.dataset.format = "**-**-****"
+      data_de_chegada.dataset.mask = "DD-MM-AAAA"      
     }
 
     document.querySelectorAll('[data-mask]').forEach(function(e) {
