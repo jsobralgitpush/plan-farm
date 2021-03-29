@@ -6,6 +6,9 @@ document.addEventListener('click',function(e){
     database = require(database_relative_path);
     values = Object.values(database["data"]);
     table_body = document.getElementsByClassName('table-body')
+    input_place = document.getElementsByClassName('action')
+    table_body[0].innerHTML = ""
+    input_place[0].innerHTML = ""
 
     for (let item of values) {
       td_to_insert = ""
@@ -22,5 +25,7 @@ document.addEventListener('click',function(e){
       </tr>
       `
     }
+
+    return
   }
 })

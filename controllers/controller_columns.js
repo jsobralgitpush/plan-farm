@@ -8,7 +8,6 @@ window.addEventListener('load', function() {
   var input_place = document.getElementsByClassName('action')[0]
   var action_helper = document.getElementsByClassName('action-helper')[0]
 
-
   // Possíveis Tabelas
   var lote = document.getElementById('lote')
   var cadastro = document.getElementById('cadastro')
@@ -56,7 +55,7 @@ function set_table_columns(html, table) {
   html.innerHTML = ""
 
   lote_columns = ["Lote", "Data_de_Chegada", "Frete", "Comissão", "Valor_Animais", "Comprador", "Numero_de_Animais"]
-  cadastro_columns = ["ID", "Data_de_Chegada", "Peso_de_Chegada_em_Kg", "Peso_@", "Lote", "Tamanho"]
+  cadastro_columns = ["Gado_ID","Lote","Data_de_Chegada", "Peso_de_Chegada_em_Kg", "Peso_@", "Tamanho"]
   info_pesagem_columns = ["Numero_Pesagem", "Data_da_Pesagem", "U_inf", "U_sup", "P_inf", "P_sup", "M_inf", "M_sup", "G_inf", "G_sup"]
   pesagem_columns = ["Numero_Pesagem", "Gado_ID", "Lote", "Check", "Kg", "Peso @", "Tamanho", "GMD"]
   financeiro_columns = ["Data", "Valor", "Classificação", "Subclassificação", "Comentário"]

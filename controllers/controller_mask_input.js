@@ -4,8 +4,18 @@ document.addEventListener('click', function (e) {
 
     if (table == "Lote") {
       let data_de_chegada = document.getElementById('Data_de_Chegada')
+      let frete = document.getElementById('Frete')
+      let comissao = document.getElementById('Comissão')
+      let valor_animais = document.getElementById('Valor_Animais')
+      let numero_de_animais = document.getElementById('Numero_de_Animais')
+
       data_de_chegada.dataset.format = "**-**-****"
       data_de_chegada.dataset.mask = "DD-MM-AAAA"
+
+      frete.setAttribute("type", "number")
+      comissao.setAttribute("type", "number")
+      valor_animais.setAttribute("type", "number")
+      numero_de_animais.setAttribute("type", "number")
     }
 
     document.querySelectorAll('[data-mask]').forEach(function(e) {

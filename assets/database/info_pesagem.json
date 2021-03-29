@@ -1,1 +1,5 @@
-{"next":3,"data":[{"Numero_Pesagem":"1","Data_da_Pesagem":"24-12-2021","U_inf":"0.0001","U_sup":"5","P_inf":"5","P_sup":"8","M_inf":"8","M_sup":"10","G_inf":"10","G_sup":"25","db_ID":2}]}
+{
+  "next": 1,
+  "data": [
+  ]
+}

@@ -1,5 +1,5 @@
-lote_columns = ["Lote","Data_de_Chegada","Frete", "Comissão", "Valor Animais", "Comprador","Numero_de_Animais"]
-cadastro_columns = ["ID", "Data_de_Chegada", "Peso_de_Chegada_em_Kg", "Peso_@", "Lote", "Tamanho"]
+lote_columns = ["Lote","Data_de_Chegada","Frete", "Comissão", "Valor_Animais", "Comprador","Numero_de_Animais"]
+cadastro_columns = ["Gado_ID", "Lote","Data_de_Chegada", "Peso_de_Chegada_em_Kg", "Peso_@", "Tamanho"]
 info_pesagem_columns = ["Numero_Pesagem", "Data_da_Pesagem", "U_inf", "U_sup", "P_inf", "P_sup", "M_inf", "M_sup", "G_inf", "G_sup"]
 pesagem_columns = ["Numero_Pesagem", "Gado_ID", "Lote", "Check", "Kg", "Peso_@", "Tamanho", "GMD"]
 financeiro_columns = ["Data", "Valor", "Classificação", "Subclassificação", "Comentário"]
@@ -16,7 +16,9 @@ document.addEventListener('click',function(e){
   if(e.target && e.target.id== 'add_register'){
     input_place = document.getElementsByClassName('action')[0]
     action_helper = document.getElementsByClassName('action-helper')[0]
-    input_place.innerHTML = ""
+    table_body = document.getElementsByClassName('table-body')[0]
+    table_body.innerHTML = ""
+
 
     table = e.target.getAttribute("data-table")
 
@@ -25,7 +27,7 @@ document.addEventListener('click',function(e){
         input_place.innerHTML = `<h1>Novo Registro de ${item[0]}</h1>`
         item[1].forEach(function(sub_item) {
           input_place.innerHTML += `
-          <div class="modal-input">
+          <div class="modal-input" id="modal_input_${sub_item}">
             <span class="color-tip color"></span>
             <label>${sub_item}</label>
             <input class='input' id="${sub_item}">

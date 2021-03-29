@@ -5,7 +5,7 @@
       "Data de Chegada": "",
       "Frete": "2000",
       "Comissão": "3000",
-      "Valor Animais": "5000",
+      "Valor_Animais": "5000",
       "Comprador": "41",
       "Número de Animais": "24"
     },
@@ -14,7 +14,7 @@
       "Data de Chegada": "",
       "Frete": "1000",
       "Comissão": "1000",
-      "Valor Animais": "1000",
+      "Valor_Animais": "1000",
       "Comprador": "5522",
       "Número de Animais": "145"
     }

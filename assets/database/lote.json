@@ -1,1 +1,5 @@
-{"next":7,"data":[{"Lote":"1","Data_de_Chegada":"24-03-2021","Frete":"3000","Comissão":"2000","Valor Animais":"1000","Comprador":"Marcelo","Numero_de_Animais":"50","db_ID":4},{"Lote":"1","Data_de_Chegada":"1","Frete":"1","Comissão":"1","Valor Animais":"1","Comprador":"1","Numero_de_Animais":"1","db_ID":5},{"Lote":"1","Data_de_Chegada":"25-03-2021","Frete":"100","Comissão":"300","Valor Animais":"3000","Comprador":"Marcelo","Numero_de_Animais":"30","db_ID":6}]}
+{
+  "next": 2,
+  "data": [
+  ]
+}
