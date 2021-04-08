@@ -1,3 +1,5 @@
+
+
 window.addEventListener('load', function() {
   // Table head para adicionarmos colunas, botões e título
   var table_head = document.getElementsByClassName("table-head")[0]

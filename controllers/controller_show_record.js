@@ -2,7 +2,7 @@
 document.addEventListener('click',function(e){
   if(e.target && e.target.id== 'show_register'){
     table = e.target.getAttribute("data-table")
-    database_relative_path = `../assets/database/${table.toLowerCase()}.json`
+    database_relative_path = path.join(path.resolve('.', 'db') + `/${table.toLowerCase()}.json`)
     database = require(database_relative_path);
     values = Object.values(database["data"]);
     table_body = document.getElementsByClassName('table-body')

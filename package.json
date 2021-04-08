@@ -15,7 +15,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "Sobral <jose.sobral@poli.ufrj.br>",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^11.2.1",
@@ -24,15 +24,23 @@
   "dependencies": {
     "electron-reload": "^1.5.0",
     "imask": "^6.0.7",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "jsonfile": "^6.1.0"
   },
   "build": {
-    "appId": "com.platform.app",
-    "icon": "build/icon.ico",
-    "target": "nsis",
-    "productName": "Farm",
+    "appId": "com.example.electron-boilerplate",
+    "files": [
+      "./**"
+    ],
     "directories": {
-      "output": "build"
+      "buildResources": "resources",
+      "output": "../out_farm"
+    },
+    "extraResources": [ {
+      "from": "./db",
+      "to": "../../db"
     }
+    ],
+    "publish": null
   }
 }

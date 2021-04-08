@@ -122,10 +122,10 @@ function count_farms_day(today, arrive) {
 }
 
 function getMetricasPesagem() {
-  const gado_relative_path = `../assets/database/cadastro.json`
-  const info_pesagem_relative_path = `../assets/database/info_pesagem.json`
-  const pesagem_relative_path = `../assets/database/pesagem.json`
-  const lote_relative_path = `../assets/database/lote.json`
+  const gado_relative_path = path.join(path.resolve('.', 'db') + `/cadastro.json`)
+  const info_pesagem_relative_path = path.join(path.resolve('.', 'db') + `/info_pesagem.json`)
+  const pesagem_relative_path = path.join(path.resolve('.', 'db') + `/pesagem.json`)
+  const lote_relative_path = path.join(path.resolve('.', 'db') + `/lote.json`)
 
   var gado_db = require(gado_relative_path);
   var info_pesagem_db = require(info_pesagem_relative_path);
