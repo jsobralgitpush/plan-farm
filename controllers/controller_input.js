@@ -1,3 +1,5 @@
+var fs = require('fs')
+
 lote_columns = ["Lote","Data_de_Chegada","Frete", "Comissão", "Valor_Animais", "Comprador","Numero_de_Animais"]
 cadastro_columns = ["Gado_ID", "Lote","Data_de_Chegada", "Peso_de_Chegada_em_Kg", "Peso_@", "Tamanho"]
 info_pesagem_columns = ["Numero_Pesagem", "Data_da_Pesagem", "U_inf", "U_sup", "P_inf", "P_sup", "M_inf", "M_sup", "G_inf", "G_sup"]
@@ -127,10 +129,17 @@ function getMetricasPesagem() {
   const pesagem_relative_path = path.join(path.resolve('.', 'db') + `/pesagem.json`)
   const lote_relative_path = path.join(path.resolve('.', 'db') + `/lote.json`)
 
-  var gado_db = require(gado_relative_path);
-  var info_pesagem_db = require(info_pesagem_relative_path);
-  var pesagem_db = require(pesagem_relative_path);
-  var lote_db = require(lote_relative_path);
+  let lote_db = fs.readFileSync(lote_db_relative_path, 'utf8')
+  lote_db = JSON.parse(lote_db)
+
+  let pesagem_db = fs.readFileSync(pesagem_relative_path, 'utf8')
+  pesagem_db = JSON.parse(pesagem_db)
+
+  let info_pesagem_db = fs.readFileSync(info_pesagem_relative_path, 'utf8')
+  info_pesagem_db = JSON.parse(info_pesagem_db)
+
+  let gado_db = fs.readFileSync(gado_relative_path, 'utf8')
+  gado_db = JSON.parse(gado_db)
 
   const gado_id = document.getElementById('Gado_ID')
   const info_pesagem_id = document.getElementById('Numero_Pesagem')

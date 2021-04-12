@@ -1,9 +1,13 @@
+var fs = require('fs')
 
 document.addEventListener('click',function(e){
   if(e.target && e.target.id== 'show_register'){
     table = e.target.getAttribute("data-table")
     database_relative_path = path.join(path.resolve('.', 'db') + `/${table.toLowerCase()}.json`)
-    database = require(database_relative_path);
+
+    let database = fs.readFileSync(database_relative_path, 'utf8')
+    database = JSON.parse(database)
+
     values = Object.values(database["data"]);
     table_body = document.getElementsByClassName('table-body')
     input_place = document.getElementsByClassName('action')

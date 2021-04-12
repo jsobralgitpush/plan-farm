@@ -1,4 +1,5 @@
 const path = require('path');
+var fs = require('fs')
 
 document.addEventListener('click', function (e) {
   if(e.target && e.target.id== 'add_register'){
@@ -36,7 +37,10 @@ function handle_lote() {
 
   // Lote não pode ser preenchido
   let lote_db_relative_path = path.join(path.resolve('.', 'db') + `/lote.json`)
-  let lote_db = require(lote_db_relative_path);
+
+  let lote_db = fs.readFileSync(lote_db_relative_path, 'utf8')
+  lote_db = JSON.parse(lote_db)
+
   let lote = document.getElementById('Lote')
   lote.value = lote_db["next"]
   lote.disabled = true
@@ -47,7 +51,10 @@ function handle_lote() {
 function handle_cadastro() {
   // lote como um select de todos os lotes que existem
   let lote_db_relative_path = path.join(path.resolve('.', 'db') + `/lote.json`)
-  let lote_db = require(lote_db_relative_path);
+
+  let lote_db = fs.readFileSync(lote_db_relative_path, 'utf8')
+  lote_db = JSON.parse(lote_db)
+
   let lote_ids = lote_db["data"].map(x => x.Lote)
   let lote_div = document.getElementById('modal_input_Lote')
   lote_div.innerHTML = 
@@ -74,10 +81,12 @@ function handle_cadastro() {
 
   // Gado ID como o próximo IDasd
   let cadastro_db_relative_path = path.join(path.resolve('.', 'db') + `/cadastro.json`)
-  let cadastro_db = require(cadastro_db_relative_path);
+
+  let cadastro_db = fs.readFileSync(cadastro_db_relative_path, 'utf8')
+  cadastro_db = JSON.parse(cadastro_db)
+
   let gado_id = document.getElementById('Gado_ID')
   gado_id.value = cadastro_db["next"]
-
   
   return 
 }
@@ -132,7 +141,9 @@ function set_tamanho(event) {
 function add_data_chegada(event) {
   let lote = event.target.value
   let lote_db_relative_path = path.join(path.resolve('.', 'db') + `/lote.json`)
-  let lote_db = require(lote_db_relative_path);
+
+  let lote_db = fs.readFileSync(lote_db_relative_path, 'utf8')
+  lote_db = JSON.parse(lote_db)
 
   let lote_info = lote_db["data"].filter(function (entry) {
     return entry.Lote == lote
