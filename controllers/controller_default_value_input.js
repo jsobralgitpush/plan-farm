@@ -61,7 +61,7 @@ function handle_cadastro() {
   `
     <span class="color-tip color"></span>
     <label>Lote</label>
-    <select class="select-lote" id="Lote"></select>
+    <select class="select-lote input" id="Lote"></select>
   `
   let select_lote = document.getElementsByClassName('select-lote')[0]
   lote_ids.forEach(function(element) {

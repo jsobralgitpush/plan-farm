@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dist": "electron-builder"
+    "dist": "electron-builder -mwl"
   },
   "repository": "https://github.com/jsobralgitpush/plan-farm.git",
   "keywords": [
@@ -32,6 +32,7 @@
     "files": [
       "./**"
     ],
+    "productName": "Gestao_Fazenda",
     "directories": {
       "buildResources": "resources",
       "output": "../out_farm"
